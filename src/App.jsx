@@ -8,6 +8,7 @@ import TeamManagement from './pages/TeamManagement';
 import Analytics from './pages/Analytics';
 import ActivityLogs from './pages/ActivityLogs';
 import Billing from './pages/Billing';
+import InvoiceDetail from './pages/InvoiceDetail';
 import Settings from './pages/Settings';
 import Security from './pages/Security';
 import Support from './pages/Support';
@@ -26,6 +27,7 @@ function App() {
         <Route path="analytics" element={<Analytics />} />
         <Route path="activity" element={<ActivityLogs />} />
         <Route path="billing" element={<Billing />} />
+        <Route path="billing/invoices/:id" element={<InvoiceDetail />} />
         <Route path="settings" element={<Settings />} />
         <Route path="security" element={<Security />} />
         <Route path="support" element={<Support />} />
