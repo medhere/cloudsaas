@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { Box, Play, Pause, RefreshCw, Trash2, Plus, ExternalLink } from 'lucide-react';
 
 const ProjectApplications = () => {
@@ -8,16 +8,16 @@ const ProjectApplications = () => {
   
   // Mock data for applications
   const webApps = [
-    { id: 1, name: 'Frontend App', status: 'Running', type: 'Node.js', url: 'https://frontend.example.com', port: 3000 },
-    { id: 2, name: 'Admin Panel', status: 'Running', type: 'React', url: 'https://admin.example.com', port: 3001 },
-    { id: 3, name: 'Landing Page', status: 'Stopped', type: 'Static HTML', url: 'https://landing.example.com', port: 8080 },
+    { id: 'frontend-app', name: 'Frontend App', status: 'Running', type: 'Node.js', url: 'https://frontend.example.com', port: 3000 },
+    { id: 'admin-panel', name: 'Admin Panel', status: 'Running', type: 'React', url: 'https://admin.example.com', port: 3001 },
+    { id: 'landing-page', name: 'Landing Page', status: 'Stopped', type: 'Static HTML', url: 'https://landing.example.com', port: 8080 },
   ];
   
   const dockerApps = [
-    { id: 1, name: 'API Server', status: 'Running', image: 'node:14', ports: '4000:4000', created: '10 days ago' },
-    { id: 2, name: 'Database', status: 'Running', image: 'postgres:13', ports: '5432:5432', created: '10 days ago' },
-    { id: 3, name: 'Redis Cache', status: 'Running', image: 'redis:6', ports: '6379:6379', created: '5 days ago' },
-    { id: 4, name: 'Nginx Proxy', status: 'Running', image: 'nginx:latest', ports: '80:80, 443:443', created: '10 days ago' },
+    { id: 'api-server', name: 'API Server', status: 'Running', image: 'node:14', ports: '4000:4000', created: '10 days ago' },
+    { id: 'database', name: 'Database', status: 'Running', image: 'postgres:13', ports: '5432:5432', created: '10 days ago' },
+    { id: 'redis-cache', name: 'Redis Cache', status: 'Running', image: 'redis:6', ports: '6379:6379', created: '5 days ago' },
+    { id: 'nginx-proxy', name: 'Nginx Proxy', status: 'Running', image: 'nginx:latest', ports: '80:80, 443:443', created: '10 days ago' },
   ];
   
   return (
@@ -88,7 +88,9 @@ const ProjectApplications = () => {
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="flex items-center">
                       <Box className="text-gray-500 mr-2" size={18} />
-                      <div className="text-sm font-medium text-gray-900">{app.name}</div>
+                      <Link to={`/project/${projectId}/app/${app.id}`} className="text-sm font-medium text-blue-600 hover:text-blue-800">
+                        {app.name}
+                      </Link>
                     </div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
@@ -168,7 +170,9 @@ const ProjectApplications = () => {
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="flex items-center">
                       <Box className="text-gray-500 mr-2" size={18} />
-                      <div className="text-sm font-medium text-gray-900">{app.name}</div>
+                      <Link to={`/project/${projectId}/app/${app.id}`} className="text-sm font-medium text-blue-600 hover:text-blue-800">
+                        {app.name}
+                      </Link>
                     </div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">

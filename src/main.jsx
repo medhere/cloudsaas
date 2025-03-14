@@ -8,6 +8,7 @@ import './index.css'
 import MainLayout from './components/layout/MainLayout'
 import DashboardLayout from './components/layout/DashboardLayout'
 import ProjectLayout from './components/layout/ProjectLayout'
+import AppLayout from './components/layout/AppLayout'
 
 // Main pages
 import HomePage from './pages/HomePage'
@@ -46,6 +47,27 @@ import ProjectFirewall from './pages/project/ProjectFirewall'
 import ProjectRegistry from './pages/project/ProjectRegistry'
 import ProjectEvents from './pages/project/ProjectEvents'
 import ProjectMonitoring from './pages/project/ProjectMonitoring'
+
+// App pages
+import AppOverview from './pages/app/AppOverview'
+import AppLogs from './pages/app/AppLogs'
+import AppUsersACL from './pages/app/AppUsersACL'
+import AppServiceACL from './pages/app/AppServiceACL'
+import AppBuilder from './pages/app/AppBuilder'
+import AppGitDeployment from './pages/app/AppGitDeployment'
+import AppConfigManager from './pages/app/AppConfigManager'
+import AppDomains from './pages/app/AppDomains'
+import AppSSL from './pages/app/AppSSL'
+import AppProcesses from './pages/app/AppProcesses'
+import AppShell from './pages/app/AppShell'
+import AppCron from './pages/app/AppCron'
+import AppPorts from './pages/app/AppPorts'
+import AppProxy from './pages/app/AppProxy'
+import AppStorage from './pages/app/AppStorage'
+import AppIntegration from './pages/app/AppIntegration'
+import AppConfigFiles from './pages/app/AppConfigFiles'
+import AppRoutine from './pages/app/AppRoutine'
+import AppMonit from './pages/app/AppMonit'
 
 const router = createBrowserRouter([
   {
@@ -100,6 +122,32 @@ const router = createBrowserRouter([
           { path: 'registry', element: <ProjectRegistry /> },
           { path: 'events', element: <ProjectEvents /> },
           { path: 'monitoring', element: <ProjectMonitoring /> },
+        ],
+      },
+      // Application-specific routes
+      {
+        path: 'project/:projectId/app/:appId',
+        element: <AppLayout />,
+        children: [
+          { index: true, element: <AppOverview /> },
+          { path: 'logs', element: <AppLogs /> },
+          { path: 'users-acl', element: <AppUsersACL /> },
+          { path: 'service-acl', element: <AppServiceACL /> },
+          { path: 'builder', element: <AppBuilder /> },
+          { path: 'git', element: <AppGitDeployment /> },
+          { path: 'config', element: <AppConfigManager /> },
+          { path: 'domains', element: <AppDomains /> },
+          { path: 'ssl', element: <AppSSL /> },
+          { path: 'processes', element: <AppProcesses /> },
+          { path: 'shell', element: <AppShell /> },
+          { path: 'cron', element: <AppCron /> },
+          { path: 'ports', element: <AppPorts /> },
+          { path: 'proxy', element: <AppProxy /> },
+          { path: 'storage', element: <AppStorage /> },
+          { path: 'integration', element: <AppIntegration /> },
+          { path: 'config-files', element: <AppConfigFiles /> },
+          { path: 'routine', element: <AppRoutine /> },
+          { path: 'monit', element: <AppMonit /> },
         ],
       },
       // Add documentation route at the root level
