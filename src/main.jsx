@@ -102,6 +102,11 @@ const router = createBrowserRouter([
           { path: 'monitoring', element: <ProjectMonitoring /> },
         ],
       },
+      // Add documentation route at the root level
+      {
+        path: 'documentation/*',
+        element: <Documentation />
+      }
     ],
   },
 ])
