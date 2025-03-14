@@ -3,6 +3,7 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import MainLayout from './components/layout/MainLayout';
 import Dashboard from './pages/Dashboard';
 import Projects from './pages/Projects';
+import ProjectCreate from './pages/ProjectCreate';
 import TeamManagement from './pages/TeamManagement';
 import Analytics from './pages/Analytics';
 import ActivityLogs from './pages/ActivityLogs';
@@ -20,6 +21,7 @@ function App() {
         <Route index element={<Navigate to="/dashboard" replace />} />
         <Route path="dashboard" element={<Dashboard />} />
         <Route path="projects" element={<Projects />} />
+        <Route path="projects/create" element={<ProjectCreate />} />
         <Route path="team" element={<TeamManagement />} />
         <Route path="analytics" element={<Analytics />} />
         <Route path="activity" element={<ActivityLogs />} />
