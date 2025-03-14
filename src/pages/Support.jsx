@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
-import { MessageSquare, FileText, HelpCircle, Clock, Plus, CreditCard, Wallet, AlertTriangle, X, Bell, Calendar, ChevronRight, ThumbsUp, Send, Star } from 'lucide-react';
-import { Link, useNavigate } from 'react-router-dom';
+import { MessageSquare, HelpCircle, Clock, Plus, CreditCard, Wallet, AlertTriangle, X, Bell, Calendar, ChevronRight, ThumbsUp, Send, Star } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import SupportChat from '../components/support/SupportChat';
 import TicketModal from '../components/support/TicketModal';
 
 const Support = () => {
-  const navigate = useNavigate();
   const [showChat, setShowChat] = useState(false);
   const [showTickets, setShowTickets] = useState(false);
   const [showTicketModal, setShowTicketModal] = useState(false);
@@ -137,11 +136,6 @@ const Support = () => {
     }
   };
 
-  // Navigate to documentation page
-  const goToDocumentation = () => {
-    navigate('/documentation');
-  };
-
   // Handle feedback submission
   const handleFeedbackSubmit = (e) => {
     e.preventDefault();
@@ -184,28 +178,6 @@ const Support = () => {
               </div>
             </div>
             
-            {/* Documentation Card */}
-            <div className="bg-white rounded-lg shadow overflow-hidden border border-gray-200 hover:border-blue-500 transition-colors">
-              <div className="p-6">
-                <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
-                  <FileText className="text-purple-600" size={24} />
-                </div>
-                <h3 className="text-lg font-semibold mb-2">Documentation</h3>
-                <p className="text-gray-600 mb-4">
-                  Browse our comprehensive documentation for detailed guides, tutorials, and API references.
-                </p>
-                <div className="flex items-center text-sm text-gray-600 mb-4">
-                  <span>Regularly updated with the latest information</span>
-                </div>
-                <button 
-                  onClick={goToDocumentation}
-                  className="w-full bg-purple-600 hover:bg-purple-700 text-white py-2 rounded-md"
-                >
-                  View Documentation
-                </button>
-              </div>
-            </div>
-            
             {/* Support Tickets Card */}
             <div className="bg-white rounded-lg shadow overflow-hidden border border-gray-200 hover:border-blue-500 transition-colors">
               <div className="p-6">
@@ -228,13 +200,36 @@ const Support = () => {
                 </button>
               </div>
             </div>
+            
+            {/* Feedback Card */}
+            <div className="bg-white rounded-lg shadow overflow-hidden border border-gray-200 hover:border-purple-500 transition-colors">
+              <div className="p-6">
+                <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
+                  <ThumbsUp className="text-purple-600" size={24} />
+                </div>
+                <h3 className="text-lg font-semibold mb-2">Submit Feedback</h3>
+                <p className="text-gray-600 mb-4">
+                  Help us improve our support services by providing your feedback and suggestions.
+                </p>
+                <div className="flex items-center text-sm text-purple-600 mb-4">
+                  <Star size={16} className="mr-1 fill-purple-600" />
+                  <span>Rate your experience with us</span>
+                </div>
+                <button 
+                  onClick={() => setShowFeedbackForm(true)}
+                  className="w-full bg-purple-600 hover:bg-purple-700 text-white py-2 rounded-md"
+                >
+                  Give Feedback
+                </button>
+              </div>
+            </div>
           </div>
           
           {/* Support Overview */}
           <div className="bg-white rounded-lg shadow overflow-hidden">
             <div className="p-6">
               <h2 className="text-lg font-semibold mb-4">Support Overview</h2>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="bg-blue-50 rounded-lg p-4">
                   <h3 className="text-sm font-medium text-blue-800 mb-2">Support Status</h3>
                   <div className="space-y-2">
@@ -269,18 +264,6 @@ const Support = () => {
                       <span className="font-medium">{supportOverview.lastTicketUpdate}</span>
                     </div>
                   </div>
-                </div>
-                
-                <div className="bg-purple-50 rounded-lg p-4">
-                  <h3 className="text-sm font-medium text-purple-800 mb-2">Feedback</h3>
-                  <p className="text-gray-600 mb-3">Help us improve our support services by providing your feedback.</p>
-                  <button 
-                    onClick={() => setShowFeedbackForm(true)}
-                    className="w-full bg-purple-600 hover:bg-purple-700 text-white py-2 rounded-md flex items-center justify-center"
-                  >
-                    <ThumbsUp size={16} className="mr-2" />
-                    <span>Submit Feedback</span>
-                  </button>
                 </div>
               </div>
             </div>

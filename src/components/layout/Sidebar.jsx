@@ -10,7 +10,8 @@ import {
   Settings, 
   Shield, 
   HelpCircle,
-  LogOut
+  LogOut,
+  FileText
 } from 'lucide-react';
 
 const Sidebar = () => {
@@ -21,6 +22,7 @@ const Sidebar = () => {
     { name: 'Analytics', icon: <BarChart2 size={20} />, path: '/analytics' },
     { name: 'Activity', icon: <Clock size={20} />, path: '/activity' },
     { name: 'Billing', icon: <CreditCard size={20} />, path: '/billing' },
+    { name: 'Documentation', icon: <FileText size={20} />, path: '/documentation' },
     { name: 'Settings', icon: <Settings size={20} />, path: '/settings' },
     { name: 'Security', icon: <Shield size={20} />, path: '/security' },
     { name: 'Support', icon: <HelpCircle size={20} />, path: '/support' },
