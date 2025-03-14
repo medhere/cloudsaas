@@ -1,33 +1,37 @@
-import React from 'react'
-import { Routes, Route } from 'react-router-dom'
-import MainLayout from './components/layout/MainLayout'
-import Dashboard from './pages/Dashboard'
-import Projects from './pages/Projects'
-import Billing from './pages/Billing'
-import Settings from './pages/Settings'
-import TeamManagement from './pages/TeamManagement'
-import ActivityLogs from './pages/ActivityLogs'
-import Security from './pages/Security'
-import Analytics from './pages/Analytics'
-import Support from './pages/Support'
+import React from 'react';
+import { Routes, Route, Navigate } from 'react-router-dom';
+import MainLayout from './components/layout/MainLayout';
+import Dashboard from './pages/Dashboard';
+import Projects from './pages/Projects';
+import TeamManagement from './pages/TeamManagement';
+import Analytics from './pages/Analytics';
+import ActivityLogs from './pages/ActivityLogs';
+import Billing from './pages/Billing';
+import Settings from './pages/Settings';
+import Security from './pages/Security';
+import Support from './pages/Support';
+import Announcements from './pages/Announcements';
+import AnnouncementDetail from './pages/AnnouncementDetail';
 
 function App() {
   return (
     <Routes>
       <Route path="/" element={<MainLayout />}>
-        <Route index element={<Dashboard />} />
+        <Route index element={<Navigate to="/dashboard" replace />} />
         <Route path="dashboard" element={<Dashboard />} />
         <Route path="projects" element={<Projects />} />
+        <Route path="team" element={<TeamManagement />} />
+        <Route path="analytics" element={<Analytics />} />
+        <Route path="activity" element={<ActivityLogs />} />
         <Route path="billing" element={<Billing />} />
         <Route path="settings" element={<Settings />} />
-        <Route path="team" element={<TeamManagement />} />
-        <Route path="activity" element={<ActivityLogs />} />
         <Route path="security" element={<Security />} />
-        <Route path="analytics" element={<Analytics />} />
         <Route path="support" element={<Support />} />
+        <Route path="support/announcements" element={<Announcements />} />
+        <Route path="support/announcements/:id" element={<AnnouncementDetail />} />
       </Route>
     </Routes>
-  )
+  );
 }
 
-export default App
+export default App;
