@@ -1,5 +1,6 @@
 import React from 'react';
 import { Bell, Search, HelpCircle } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
   return (
@@ -16,9 +17,9 @@ const Header = () => {
       </div>
       
       <div className="flex items-center gap-4">
-        <button className="p-2 rounded-full hover:bg-gray-100">
+        <Link to="/documentation" className="p-2 rounded-full hover:bg-gray-100">
           <HelpCircle size={20} className="text-gray-600" />
-        </button>
+        </Link>
         <div className="relative">
           <button className="p-2 rounded-full hover:bg-gray-100">
             <Bell size={20} className="text-gray-600" />

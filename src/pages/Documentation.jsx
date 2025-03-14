@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import { ChevronRight, Book, FileText, Code, Server, Database, Shield, Settings, HelpCircle, ArrowLeft } from 'lucide-react';
+import { ChevronRight, Book, FileText, Code, Server, Database, Shield, Settings, HelpCircle, ArrowLeft, Search } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import TopNavbar from '../components/layout/TopNavbar';
 
 const Documentation = () => {
   const [activeSection, setActiveSection] = useState('getting-started');
   const [activeDoc, setActiveDoc] = useState('introduction');
+  const [searchQuery, setSearchQuery] = useState('');
 
   // Documentation structure
   const docSections = [
@@ -183,71 +185,95 @@ Congratulations! Your application is now live on CloudSaaS.
   // Get current documentation content
   const currentDocContent = documentationContent[activeDoc] || 'Documentation content not found.';
 
+  // Filter sections based on search query
+  const filteredSections = searchQuery
+    ? docSections.map(section => ({
+        ...section,
+        docs: section.docs.filter(doc => 
+          doc.title.toLowerCase().includes(searchQuery.toLowerCase())
+        )
+      })).filter(section => section.docs.length > 0)
+    : docSections;
+
   return (
-    <div className="flex min-h-screen bg-gray-50">
-      {/* Documentation Sidebar */}
-      <div className="w-64 bg-white border-r border-gray-200 min-h-screen">
-        <div className="p-6 border-b border-gray-200">
-          <h1 className="text-xl font-bold">Documentation</h1>
-        </div>
-        
-        <nav className="p-4">
-          {docSections.map((section) => (
-            <div key={section.id} className="mb-4">
-              <button
-                onClick={() => setActiveSection(section.id === activeSection ? null : section.id)}
-                className="flex items-center justify-between w-full text-left px-2 py-2 text-sm font-medium text-gray-700 rounded-md hover:bg-gray-100"
-              >
-                <div className="flex items-center">
-                  <span className="mr-2 text-gray-500">{section.icon}</span>
-                  {section.title}
-                </div>
-                <ChevronRight
-                  size={16}
-                  className={`transform transition-transform ${
-                    activeSection === section.id ? 'rotate-90' : ''
-                  }`}
-                />
-              </button>
-              
-              {activeSection === section.id && (
-                <div className="mt-1 pl-8 space-y-1">
-                  {section.docs.map((doc) => (
-                    <button
-                      key={doc.id}
-                      onClick={() => setActiveDoc(doc.id)}
-                      className={`block w-full text-left px-2 py-2 text-sm rounded-md ${
-                        activeDoc === doc.id
-                          ? 'bg-blue-50 text-blue-700 font-medium'
-                          : 'text-gray-600 hover:bg-gray-50'
-                      }`}
-                    >
-                      {doc.title}
-                    </button>
-                  ))}
-                </div>
-              )}
-            </div>
-          ))}
-        </nav>
-      </div>
+    <div className="min-h-screen bg-gray-50">
+      {/* Top Navigation */}
+      <TopNavbar />
       
-      {/* Documentation Content */}
-      <div className="flex-1 overflow-auto p-8">
-        {/* Back Button */}
-        <div className="max-w-4xl mx-auto mb-4">
-          <Link 
-            to="/" 
-            className="inline-flex items-center text-sm font-medium text-blue-800 hover:text-blue-700"
-          >
-            <ArrowLeft size={16} className="mr-1" />
-            Back to Home
-          </Link>
+      <div className="pt-16 flex min-h-[calc(100vh-64px)]">
+        {/* Documentation Sidebar */}
+        <div className="w-64 bg-white border-r border-gray-200 min-h-full">
+          <div className="p-4 border-b border-gray-200">
+            <div className="relative">
+              <input
+                type="text"
+                placeholder="Search docs..."
+                className="w-full pl-10 pr-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={18} />
+            </div>
+          </div>
+          
+          <nav className="p-4 overflow-y-auto max-h-[calc(100vh-180px)]">
+            {filteredSections.map((section) => (
+              <div key={section.id} className="mb-4">
+                <button
+                  onClick={() => setActiveSection(section.id === activeSection ? null : section.id)}
+                  className="flex items-center justify-between w-full text-left px-2 py-2 text-sm font-medium text-gray-700 rounded-md hover:bg-gray-100"
+                >
+                  <div className="flex items-center">
+                    <span className="mr-2 text-gray-500">{section.icon}</span>
+                    {section.title}
+                  </div>
+                  <ChevronRight
+                    size={16}
+                    className={`transform transition-transform ${
+                      activeSection === section.id ? 'rotate-90' : ''
+                    }`}
+                  />
+                </button>
+                
+                {activeSection === section.id && (
+                  <div className="mt-1 pl-8 space-y-1">
+                    {section.docs.map((doc) => (
+                      <button
+                        key={doc.id}
+                        onClick={() => setActiveDoc(doc.id)}
+                        className={`block w-full text-left px-2 py-2 text-sm rounded-md ${
+                          activeDoc === doc.id
+                            ? 'bg-blue-50 text-blue-700 font-medium'
+                            : 'text-gray-600 hover:bg-gray-50'
+                        }`}
+                      >
+                        {doc.title}
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ))}
+          </nav>
         </div>
         
-        <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-sm p-8">
-          <div className="prose max-w-none">
-            <pre className="whitespace-pre-wrap">{currentDocContent}</pre>
+        {/* Documentation Content */}
+        <div className="flex-1 overflow-auto p-8">
+          {/* Back Button */}
+          <div className="max-w-4xl mx-auto mb-4">
+            <Link 
+              to="/" 
+              className="inline-flex items-center text-sm font-medium text-blue-800 hover:text-blue-700"
+            >
+              <ArrowLeft size={16} className="mr-1" />
+              Back to Home
+            </Link>
+          </div>
+          
+          <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-sm p-8">
+            <div className="prose max-w-none">
+              <pre className="whitespace-pre-wrap">{currentDocContent}</pre>
+            </div>
           </div>
         </div>
       </div>

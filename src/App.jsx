@@ -2,6 +2,7 @@ import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import DashboardLayout from './components/layout/DashboardLayout';
 import MainLayout from './components/layout/MainLayout';
+import ProjectLayout from './components/layout/ProjectLayout';
 import Dashboard from './pages/Dashboard';
 import Projects from './pages/Projects';
 import ProjectCreate from './pages/ProjectCreate';
@@ -21,6 +22,21 @@ import HomePage from './pages/HomePage';
 import AuthPage from './pages/AuthPage';
 import PricingPage from './pages/PricingPage';
 import FeaturesPage from './pages/FeaturesPage';
+
+// Project pages
+import ProjectOverview from './pages/project/ProjectOverview';
+import ProjectManage from './pages/project/ProjectManage';
+import ProjectApplications from './pages/project/ProjectApplications';
+import ProjectMarketplace from './pages/project/ProjectMarketplace';
+import ProjectKeys from './pages/project/ProjectKeys';
+import ProjectDeployment from './pages/project/ProjectDeployment';
+import ProjectDNS from './pages/project/ProjectDNS';
+import ProjectNetwork from './pages/project/ProjectNetwork';
+import ProjectShell from './pages/project/ProjectShell';
+import ProjectFirewall from './pages/project/ProjectFirewall';
+import ProjectRegistry from './pages/project/ProjectRegistry';
+import ProjectEvents from './pages/project/ProjectEvents';
+import ProjectMonitoring from './pages/project/ProjectMonitoring';
 
 function App() {
   return (
@@ -49,6 +65,23 @@ function App() {
         <Route path="support" element={<Support />} />
         <Route path="support/announcements" element={<Announcements />} />
         <Route path="support/announcements/:id" element={<AnnouncementDetail />} />
+      </Route>
+      
+      {/* Project Pages with Project Sidebar */}
+      <Route path="/project/:slug" element={<ProjectLayout />}>
+        <Route index element={<ProjectOverview />} />
+        <Route path="manage" element={<ProjectManage />} />
+        <Route path="applications" element={<ProjectApplications />} />
+        <Route path="marketplace" element={<ProjectMarketplace />} />
+        <Route path="keys" element={<ProjectKeys />} />
+        <Route path="deployment" element={<ProjectDeployment />} />
+        <Route path="dns" element={<ProjectDNS />} />
+        <Route path="network" element={<ProjectNetwork />} />
+        <Route path="shell" element={<ProjectShell />} />
+        <Route path="firewall" element={<ProjectFirewall />} />
+        <Route path="registry" element={<ProjectRegistry />} />
+        <Route path="events" element={<ProjectEvents />} />
+        <Route path="monitoring" element={<ProjectMonitoring />} />
       </Route>
       
       {/* Documentation as a standalone section */}
