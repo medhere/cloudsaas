@@ -1,221 +1,157 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { Box, Play, Pause, RefreshCw, Trash2, Plus, ExternalLink } from 'lucide-react';
+import { Server, Plus, ExternalLink, Settings, Activity, Clock, BarChart2 } from 'lucide-react';
 
 const ProjectApplications = () => {
   const { projectId } = useParams();
-  const [activeTab, setActiveTab] = useState('web');
   
   // Mock data for applications
-  const webApps = [
-    { id: 'frontend-app', name: 'Frontend App', status: 'Running', type: 'Node.js', url: 'https://frontend.example.com', port: 3000 },
-    { id: 'admin-panel', name: 'Admin Panel', status: 'Running', type: 'React', url: 'https://admin.example.com', port: 3001 },
-    { id: 'landing-page', name: 'Landing Page', status: 'Stopped', type: 'Static HTML', url: 'https://landing.example.com', port: 8080 },
+  const applications = [
+    {
+      id: 'web-app',
+      name: 'Web Application',
+      type: 'Node.js',
+      status: 'running',
+      url: 'https://web-app.example.com',
+      cpu: '12%',
+      memory: '256MB / 512MB',
+      uptime: '10 days, 4 hours'
+    },
+    {
+      id: 'api-service',
+      name: 'API Service',
+      type: 'Python',
+      status: 'running',
+      url: 'https://api.example.com',
+      cpu: '8%',
+      memory: '128MB / 256MB',
+      uptime: '15 days, 2 hours'
+    },
+    {
+      id: 'database',
+      name: 'Database',
+      type: 'PostgreSQL',
+      status: 'running',
+      url: 'internal',
+      cpu: '5%',
+      memory: '512MB / 1GB',
+      uptime: '15 days, 2 hours'
+    },
+    {
+      id: 'worker',
+      name: 'Background Worker',
+      type: 'Node.js',
+      status: 'running',
+      url: 'internal',
+      cpu: '3%',
+      memory: '128MB / 256MB',
+      uptime: '8 days, 10 hours'
+    },
+    {
+      id: 'staging-app',
+      name: 'Staging Environment',
+      type: 'Node.js',
+      status: 'stopped',
+      url: 'https://staging.example.com',
+      cpu: '0%',
+      memory: '0MB / 512MB',
+      uptime: '0 minutes'
+    }
   ];
-  
-  const dockerApps = [
-    { id: 'api-server', name: 'API Server', status: 'Running', image: 'node:14', ports: '4000:4000', created: '10 days ago' },
-    { id: 'database', name: 'Database', status: 'Running', image: 'postgres:13', ports: '5432:5432', created: '10 days ago' },
-    { id: 'redis-cache', name: 'Redis Cache', status: 'Running', image: 'redis:6', ports: '6379:6379', created: '5 days ago' },
-    { id: 'nginx-proxy', name: 'Nginx Proxy', status: 'Running', image: 'nginx:latest', ports: '80:80, 443:443', created: '10 days ago' },
-  ];
-  
+
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
-        <h1 className="text-2xl font-bold">Applications: {projectId}</h1>
-        <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md flex items-center gap-2">
-          <Plus size={18} />
-          <span>Deploy New App</span>
+        <h1 className="text-2xl font-bold">Applications</h1>
+        <button className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 flex items-center">
+          <Plus size={16} className="mr-2" />
+          New Application
         </button>
       </div>
       
-      {/* Tabs */}
-      <div className="border-b border-gray-200">
-        <nav className="-mb-px flex space-x-8">
-          <button
-            onClick={() => setActiveTab('web')}
-            className={`py-4 px-1 border-b-2 font-medium text-sm ${
-              activeTab === 'web'
-                ? 'border-blue-500 text-blue-600'
-                : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-            }`}
-          >
-            Web Applications
-          </button>
-          <button
-            onClick={() => setActiveTab('docker')}
-            className={`py-4 px-1 border-b-2 font-medium text-sm ${
-              activeTab === 'docker'
-                ? 'border-blue-500 text-blue-600'
-                : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-            }`}
-          >
-            Docker Containers
-          </button>
-        </nav>
+      <div className="grid grid-cols-1 gap-6">
+        {applications.map((app) => (
+          <div key={app.id} className="bg-white rounded-lg shadow overflow-hidden">
+            <div className="p-6">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center">
+                  <div className="w-10 h-10 bg-blue-100 rounded-md flex items-center justify-center text-blue-600 mr-4">
+                    <Server size={20} />
+                  </div>
+                  <div>
+                    <h2 className="text-xl font-semibold">{app.name}</h2>
+                    <p className="text-sm text-gray-500">{app.type}</p>
+                  </div>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <span className={`px-3 py-1 inline-flex items-center text-sm font-medium rounded-full ${
+                    app.status === 'running' ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800'
+                  }`}>
+                    <span className={`w-2 h-2 mr-2 rounded-full ${app.status === 'running' ? 'bg-green-500' : 'bg-gray-500'}`}></span>
+                    {app.status === 'running' ? 'Running' : 'Stopped'}
+                  </span>
+                </div>
+              </div>
+              
+              <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div className="flex flex-col">
+                  <span className="text-sm text-gray-500 flex items-center">
+                    <Activity size={16} className="mr-1" /> CPU Usage
+                  </span>
+                  <span className="text-lg font-medium">{app.cpu}</span>
+                </div>
+                <div className="flex flex-col">
+                  <span className="text-sm text-gray-500 flex items-center">
+                    <Server size={16} className="mr-1" /> Memory
+                  </span>
+                  <span className="text-lg font-medium">{app.memory}</span>
+                </div>
+                <div className="flex flex-col">
+                  <span className="text-sm text-gray-500 flex items-center">
+                    <Clock size={16} className="mr-1" /> Uptime
+                  </span>
+                  <span className="text-lg font-medium">{app.uptime}</span>
+                </div>
+              </div>
+              
+              <div className="mt-6 flex flex-wrap gap-2">
+                <Link 
+                  to={`/project/${projectId}/app/${app.id}/overview`} 
+                  className="px-3 py-2 bg-blue-50 text-blue-700 rounded-md hover:bg-blue-100 flex items-center text-sm"
+                >
+                  <Settings size={16} className="mr-1" />
+                  Manage
+                </Link>
+                <Link 
+                  to={`/project/${projectId}/app/${app.id}/routine`} 
+                  className="px-3 py-2 bg-gray-50 text-gray-700 rounded-md hover:bg-gray-100 flex items-center text-sm"
+                >
+                  <Clock size={16} className="mr-1" />
+                  Routine Tasks
+                </Link>
+                <Link 
+                  to={`/project/${projectId}/app/${app.id}/monit`} 
+                  className="px-3 py-2 bg-gray-50 text-gray-700 rounded-md hover:bg-gray-100 flex items-center text-sm"
+                >
+                  <BarChart2 size={16} className="mr-1" />
+                  Monitoring
+                </Link>
+                {app.url !== 'internal' && (
+                  <a 
+                    href={app.url} 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="px-3 py-2 bg-gray-50 text-gray-700 rounded-md hover:bg-gray-100 flex items-center text-sm"
+                  >
+                    <ExternalLink size={16} className="mr-1" />
+                    Open URL
+                  </a>
+                )}
+              </div>
+            </div>
+          </div>
+        ))}
       </div>
-      
-      {/* Web Applications */}
-      {activeTab === 'web' && (
-        <div className="bg-white rounded-lg shadow overflow-hidden">
-          <table className="min-w-full divide-y divide-gray-200">
-            <thead className="bg-gray-50">
-              <tr>
-                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Name
-                </th>
-                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Status
-                </th>
-                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Type
-                </th>
-                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  URL
-                </th>
-                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Port
-                </th>
-                <th scope="col" className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Actions
-                </th>
-              </tr>
-            </thead>
-            <tbody className="bg-white divide-y divide-gray-200">
-              {webApps.map((app) => (
-                <tr key={app.id}>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="flex items-center">
-                      <Box className="text-gray-500 mr-2" size={18} />
-                      <Link to={`/project/${projectId}/app/${app.id}`} className="text-sm font-medium text-blue-600 hover:text-blue-800">
-                        {app.name}
-                      </Link>
-                    </div>
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <span className={`px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full ${
-                      app.status === 'Running' ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800'
-                    }`}>
-                      {app.status}
-                    </span>
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="text-sm text-gray-500">{app.type}</div>
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <a href={app.url} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-900 flex items-center">
-                      <span className="text-sm">{app.url}</span>
-                      <ExternalLink size={14} className="ml-1" />
-                    </a>
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="text-sm text-gray-500">{app.port}</div>
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                    <div className="flex justify-end space-x-2">
-                      {app.status === 'Running' ? (
-                        <button className="text-yellow-600 hover:text-yellow-900">
-                          <Pause size={18} />
-                        </button>
-                      ) : (
-                        <button className="text-green-600 hover:text-green-900">
-                          <Play size={18} />
-                        </button>
-                      )}
-                      <button className="text-blue-600 hover:text-blue-900">
-                        <RefreshCw size={18} />
-                      </button>
-                      <button className="text-red-600 hover:text-red-900">
-                        <Trash2 size={18} />
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      )}
-      
-      {/* Docker Containers */}
-      {activeTab === 'docker' && (
-        <div className="bg-white rounded-lg shadow overflow-hidden">
-          <table className="min-w-full divide-y divide-gray-200">
-            <thead className="bg-gray-50">
-              <tr>
-                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Name
-                </th>
-                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Status
-                </th>
-                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Image
-                </th>
-                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Ports
-                </th>
-                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Created
-                </th>
-                <th scope="col" className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Actions
-                </th>
-              </tr>
-            </thead>
-            <tbody className="bg-white divide-y divide-gray-200">
-              {dockerApps.map((app) => (
-                <tr key={app.id}>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="flex items-center">
-                      <Box className="text-gray-500 mr-2" size={18} />
-                      <Link to={`/project/${projectId}/app/${app.id}`} className="text-sm font-medium text-blue-600 hover:text-blue-800">
-                        {app.name}
-                      </Link>
-                    </div>
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <span className={`px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full ${
-                      app.status === 'Running' ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800'
-                    }`}>
-                      {app.status}
-                    </span>
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="text-sm text-gray-500">{app.image}</div>
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="text-sm text-gray-500">{app.ports}</div>
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="text-sm text-gray-500">{app.created}</div>
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                    <div className="flex justify-end space-x-2">
-                      {app.status === 'Running' ? (
-                        <button className="text-yellow-600 hover:text-yellow-900">
-                          <Pause size={18} />
-                        </button>
-                      ) : (
-                        <button className="text-green-600 hover:text-green-900">
-                          <Play size={18} />
-                        </button>
-                      )}
-                      <button className="text-blue-600 hover:text-blue-900">
-                        <RefreshCw size={18} />
-                      </button>
-                      <button className="text-red-600 hover:text-red-900">
-                        <Trash2 size={18} />
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      )}
     </div>
   );
 };
