@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
-import { UserPlus, Mail, MoreVertical, Shield, User, X, Check, Edit, ExternalLink, Search, AlertTriangle } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { UserPlus, Mail, Shield, User, X, Check, Edit, ExternalLink, ArrowRight } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
 
 const TeamManagement = () => {
-  const [showInviteModal, setShowInviteModal] = useState(false);
+  const navigate = useNavigate();
   const [isUpdateMode, setIsUpdateMode] = useState(false);
   const [currentMember, setCurrentMember] = useState(null);
-  const [searchQuery, setSearchQuery] = useState('');
-  const [selectedRole, setSelectedRole] = useState('Developer');
 
   // Teams you belong to
   const yourTeams = [
@@ -25,42 +23,14 @@ const TeamManagement = () => {
     { id: 5, name: 'Alex Brown', email: 'alex@example.com', role: 'Viewer', status: 'Pending', lastActive: 'Never' },
   ];
 
-  // Search results for autocomplete
-  const searchResults = [
-    { id: 101, name: 'David Wilson', email: 'david@example.com', department: 'Engineering' },
-    { id: 102, name: 'Emily Clark', email: 'emily@example.com', department: 'Marketing' },
-    { id: 103, name: 'Daniel Lee', email: 'daniel@example.com', department: 'Product' },
-    { id: 104, name: 'Olivia Martinez', email: 'olivia@example.com', department: 'Design' },
-  ].filter(user => 
-    user.name.toLowerCase().includes(searchQuery.toLowerCase()) || 
-    user.email.toLowerCase().includes(searchQuery.toLowerCase())
-  );
-
-  const roles = [
-    { id: 'owner', name: 'Owner', description: 'Full access to all resources and billing' },
-    { id: 'admin', name: 'Admin', description: 'Can manage team members and most settings' },
-    { id: 'developer', name: 'Developer', description: 'Can deploy and manage projects' },
-    { id: 'viewer', name: 'Viewer', description: 'Read-only access to projects' },
-  ];
-
-  const handleOpenInviteModal = () => {
-    setIsUpdateMode(false);
-    setCurrentMember(null);
-    setSearchQuery('');
-    setSelectedRole('Developer');
-    setShowInviteModal(true);
+  const handleOpenInvitePage = () => {
+    navigate('/team/invite');
   };
 
   const handleOpenUpdateModal = (member) => {
     setIsUpdateMode(true);
     setCurrentMember(member);
-    setSearchQuery(member.name);
-    setSelectedRole(member.role);
-    setShowInviteModal(true);
-  };
-
-  const handleCloseModal = () => {
-    setShowInviteModal(false);
+    navigate('/team/invite', { state: { isUpdateMode: true, member } });
   };
 
   const getRoleIcon = (role) => {
@@ -84,7 +54,7 @@ const TeamManagement = () => {
         <h1 className="text-2xl font-bold">Team Management</h1>
         <button 
           className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md flex items-center gap-2"
-          onClick={handleOpenInviteModal}
+          onClick={handleOpenInvitePage}
         >
           <UserPlus size={18} />
           <span>Invite Member</span>
@@ -263,140 +233,6 @@ const TeamManagement = () => {
           </div>
         </div>
       </div>
-
-      {/* Invite/Update Member Modal */}
-      {showInviteModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg shadow-lg max-w-md w-full p-6">
-            <div className="flex justify-between items-center mb-4">
-              <h3 className="text-lg font-semibold">
-                {isUpdateMode ? 'Update Team Member' : 'Invite Team Member'}
-              </h3>
-              <button 
-                onClick={handleCloseModal}
-                className="text-gray-500 hover:text-gray-700"
-              >
-                <X size={20} />
-              </button>
-            </div>
-            
-            <div className="space-y-4">
-              {/* Search User */}
-              <div>
-                <label htmlFor="search-user" className="block text-sm font-medium text-gray-700 mb-1">
-                  Search User
-                </label>
-                <div className="relative">
-                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <Search size={16} className="text-gray-400" />
-                  </div>
-                  <input
-                    type="text"
-                    id="search-user"
-                    className="pl-10 w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    placeholder="Search by name or email"
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    disabled={isUpdateMode}
-                  />
-                </div>
-                
-                {/* Search Results */}
-                {searchQuery && !isUpdateMode && searchResults.length > 0 && (
-                  <div className="mt-1 border border-gray-200 rounded-md shadow-sm max-h-60 overflow-y-auto">
-                    {searchResults.map((user) => (
-                      <div 
-                        key={user.id}
-                        className="p-2 hover:bg-gray-50 cursor-pointer flex items-center"
-                        onClick={() => {
-                          setSearchQuery(user.name);
-                          setCurrentMember(user);
-                        }}
-                      >
-                        <div className="h-8 w-8 rounded-full bg-gray-200 flex items-center justify-center text-gray-600 font-medium mr-2">
-                          {user.name.split(' ').map(n => n[0]).join('')}
-                        </div>
-                        <div>
-                          <p className="text-sm font-medium">{user.name}</p>
-                          <p className="text-xs text-gray-500">{user.email} • {user.department}</p>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                )}
-                
-                {searchQuery && !isUpdateMode && searchResults.length === 0 && (
-                  <div className="mt-1 p-2 border border-gray-200 rounded-md text-sm text-gray-500 flex items-center">
-                    <AlertTriangle size={16} className="text-yellow-500 mr-2" />
-                    No users found matching "{searchQuery}"
-                  </div>
-                )}
-              </div>
-              
-              {/* Role Selection */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Role
-                </label>
-                <div className="space-y-2">
-                  {roles.map((role) => (
-                    <div 
-                      key={role.id}
-                      className={`border rounded-md p-3 flex items-center cursor-pointer ${
-                        selectedRole === role.name ? 'border-blue-500 bg-blue-50' : 'border-gray-200'
-                      }`}
-                      onClick={() => setSelectedRole(role.name)}
-                    >
-                      <input
-                        type="radio"
-                        id={`role-${role.id}`}
-                        name="role"
-                        className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300"
-                        checked={selectedRole === role.name}
-                        onChange={() => setSelectedRole(role.name)}
-                      />
-                      <label htmlFor={`role-${role.id}`} className="ml-3 flex-1 cursor-pointer">
-                        <div className="flex items-center">
-                          {getRoleIcon(role.name)}
-                          <span className="ml-2 font-medium">{role.name}</span>
-                        </div>
-                        <p className="text-sm text-gray-500 mt-1">{role.description}</p>
-                      </label>
-                    </div>
-                  ))}
-                </div>
-              </div>
-              
-              {/* Custom Message */}
-              <div>
-                <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
-                  Message (Optional)
-                </label>
-                <textarea
-                  id="message"
-                  rows="3"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  placeholder="Add a personal message to your invitation..."
-                ></textarea>
-              </div>
-            </div>
-            
-            <div className="mt-6 flex justify-end space-x-3">
-              <button
-                onClick={handleCloseModal}
-                className="px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50"
-              >
-                Cancel
-              </button>
-              <button
-                className="px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-md text-sm font-medium text-white"
-              >
-                {isUpdateMode ? 'Update Member' : 'Send Invitation'}
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 };

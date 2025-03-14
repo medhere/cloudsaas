@@ -5,6 +5,7 @@ import Dashboard from './pages/Dashboard';
 import Projects from './pages/Projects';
 import ProjectCreate from './pages/ProjectCreate';
 import TeamManagement from './pages/TeamManagement';
+import TeamInvite from './pages/TeamInvite';
 import Analytics from './pages/Analytics';
 import ActivityLogs from './pages/ActivityLogs';
 import Billing from './pages/Billing';
@@ -24,6 +25,7 @@ function App() {
         <Route path="projects" element={<Projects />} />
         <Route path="projects/create" element={<ProjectCreate />} />
         <Route path="team" element={<TeamManagement />} />
+        <Route path="team/invite" element={<TeamInvite />} />
         <Route path="analytics" element={<Analytics />} />
         <Route path="activity" element={<ActivityLogs />} />
         <Route path="billing" element={<Billing />} />
