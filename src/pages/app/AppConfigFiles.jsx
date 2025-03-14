@@ -108,20 +108,20 @@ cron: node cron-worker.js`);
 
   return (
     <div className="space-y-6">
-      <div className="flex justify-between items-center">
+      <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-bold text-gray-900">Configuration Files</h1>
-          <p className="text-gray-600 mt-1">Manage app.json and Procfile configurations</p>
+          <p className="mt-1 text-gray-600">Manage app.json and Procfile configurations</p>
         </div>
         <div className="flex space-x-2">
-          <label className="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 cursor-pointer">
+          <label className="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm cursor-pointer hover:bg-gray-50">
             <Upload size={16} className="mr-2" />
             Upload
             <input type="file" className="hidden" onChange={handleFileUpload} />
           </label>
           <button 
             onClick={downloadConfig}
-            className="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50"
+            className="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50"
           >
             <Download size={16} className="mr-2" />
             Download
@@ -129,7 +129,7 @@ cron: node cron-worker.js`);
           <button 
             onClick={saveConfig}
             disabled={isLoading}
-            className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+            className="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
           >
             {isLoading ? (
               <RefreshCw size={16} className="mr-2 animate-spin" />
@@ -142,10 +142,10 @@ cron: node cron-worker.js`);
       </div>
 
       {showSuccessMessage && (
-        <div className="bg-green-50 border-l-4 border-green-400 p-4">
+        <div className="p-4 border-l-4 border-green-400 bg-green-50">
           <div className="flex">
             <div className="flex-shrink-0">
-              <svg className="h-5 w-5 text-green-400" viewBox="0 0 20 20" fill="currentColor">
+              <svg className="w-5 h-5 text-green-400" viewBox="0 0 20 20" fill="currentColor">
                 <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
               </svg>
             </div>
@@ -158,9 +158,9 @@ cron: node cron-worker.js`);
         </div>
       )}
 
-      <div className="bg-white shadow rounded-lg overflow-hidden">
+      <div className="overflow-hidden bg-white rounded-lg shadow">
         <div className="border-b border-gray-200">
-          <nav className="-mb-px flex">
+          <nav className="flex -mb-px">
             <button
               onClick={() => setActiveTab('appjson')}
               className={`${
@@ -189,10 +189,10 @@ cron: node cron-worker.js`);
         <div className="px-4 py-5 sm:p-6">
           {activeTab === 'appjson' ? (
             <div>
-              <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-4">
+              <div className="p-4 mb-4 border-l-4 border-yellow-400 bg-yellow-50">
                 <div className="flex">
                   <div className="flex-shrink-0">
-                    <AlertTriangle className="h-5 w-5 text-yellow-400" />
+                    <AlertTriangle className="w-5 h-5 text-yellow-400" />
                   </div>
                   <div className="ml-3">
                     <p className="text-sm text-yellow-700">
@@ -203,28 +203,28 @@ cron: node cron-worker.js`);
               </div>
               <textarea
                 rows={20}
-                className="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border border-gray-300 rounded-md font-mono"
+                className="block w-full font-mono border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                 value={appJsonContent}
                 onChange={(e) => setAppJsonContent(e.target.value)}
               />
             </div>
           ) : (
             <div>
-              <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-4">
+              <div className="p-4 mb-4 border-l-4 border-yellow-400 bg-yellow-50">
                 <div className="flex">
                   <div className="flex-shrink-0">
-                    <AlertTriangle className="h-5 w-5 text-yellow-400" />
+                    <AlertTriangle className="w-5 h-5 text-yellow-400" />
                   </div>
                   <div className="ml-3">
-                    <p className="text-sm text-yellow-700">
+                    {/* <p className="text-sm text-yellow-700">
                       The Procfile specifies the commands that are executed by the app on startup. Format: <process type>: <command>
-                    </p>
+                    </p> */}
                   </div>
                 </div>
               </div>
               <textarea
                 rows={10}
-                className="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border border-gray-300 rounded-md font-mono"
+                className="block w-full font-mono border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                 value={procfileContent}
                 onChange={(e) => setProcfileContent(e.target.value)}
               />
@@ -234,9 +234,9 @@ cron: node cron-worker.js`);
       </div>
 
       {activeTab === 'appjson' && (
-        <div className="bg-white shadow rounded-lg overflow-hidden">
+        <div className="overflow-hidden bg-white rounded-lg shadow">
           <div className="px-4 py-5 border-b border-gray-200 sm:px-6">
-            <h3 className="text-lg leading-6 font-medium text-gray-900">
+            <h3 className="text-lg font-medium leading-6 text-gray-900">
               app.json Reference
             </h3>
           </div>
@@ -244,7 +244,7 @@ cron: node cron-worker.js`);
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <div>
                 <h4 className="text-sm font-medium text-gray-900">Common Properties</h4>
-                <ul className="mt-2 text-sm text-gray-600 space-y-1">
+                <ul className="mt-2 space-y-1 text-sm text-gray-600">
                   <li><code className="text-xs bg-gray-100 px-1 py-0.5 rounded">name</code>: Application name</li>
                   <li><code className="text-xs bg-gray-100 px-1 py-0.5 rounded">description</code>: Brief description</li>
                   <li><code className="text-xs bg-gray-100 px-1 py-0.5 rounded">keywords</code>: Array of keywords</li>
@@ -255,7 +255,7 @@ cron: node cron-worker.js`);
               </div>
               <div>
                 <h4 className="text-sm font-medium text-gray-900">Advanced Properties</h4>
-                <ul className="mt-2 text-sm text-gray-600 space-y-1">
+                <ul className="mt-2 space-y-1 text-sm text-gray-600">
                   <li><code className="text-xs bg-gray-100 px-1 py-0.5 rounded">env</code>: Environment variables</li>
                   <li><code className="text-xs bg-gray-100 px-1 py-0.5 rounded">formation</code>: Process formation</li>
                   <li><code className="text-xs bg-gray-100 px-1 py-0.5 rounded">addons</code>: Required add-ons</li>
@@ -270,9 +270,9 @@ cron: node cron-worker.js`);
       )}
 
       {activeTab === 'procfile' && (
-        <div className="bg-white shadow rounded-lg overflow-hidden">
+        <div className="overflow-hidden bg-white rounded-lg shadow">
           <div className="px-4 py-5 border-b border-gray-200 sm:px-6">
-            <h3 className="text-lg leading-6 font-medium text-gray-900">
+            <h3 className="text-lg font-medium leading-6 text-gray-900">
               Procfile Reference
             </h3>
           </div>
@@ -280,7 +280,7 @@ cron: node cron-worker.js`);
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <div>
                 <h4 className="text-sm font-medium text-gray-900">Common Process Types</h4>
-                <ul className="mt-2 text-sm text-gray-600 space-y-1">
+                <ul className="mt-2 space-y-1 text-sm text-gray-600">
                   <li><code className="text-xs bg-gray-100 px-1 py-0.5 rounded">web</code>: Web server process</li>
                   <li><code className="text-xs bg-gray-100 px-1 py-0.5 rounded">worker</code>: Background worker process</li>
                   <li><code className="text-xs bg-gray-100 px-1 py-0.5 rounded">clock</code>: Scheduled job process</li>
@@ -289,7 +289,7 @@ cron: node cron-worker.js`);
               </div>
               <div>
                 <h4 className="text-sm font-medium text-gray-900">Format Examples</h4>
-                <ul className="mt-2 text-sm text-gray-600 space-y-1">
+                <ul className="mt-2 space-y-1 text-sm text-gray-600">
                   <li><code className="text-xs bg-gray-100 px-1 py-0.5 rounded">web: npm start</code></li>
                   <li><code className="text-xs bg-gray-100 px-1 py-0.5 rounded">worker: node worker.js</code></li>
                   <li><code className="text-xs bg-gray-100 px-1 py-0.5 rounded">release: npm run db:migrate</code></li>

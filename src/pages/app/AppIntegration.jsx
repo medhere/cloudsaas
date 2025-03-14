@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Github, GitBranch, GitPullRequest, RefreshCw, Save, Plus, Trash2, GitlabFilled, ExternalLink } from 'lucide-react';
+import { Github, GitBranch, GitPullRequest, RefreshCw, Save, Plus, Trash2, Gitlab, ExternalLink } from 'lucide-react';
 
 // Custom GitlabFilled icon since it's not in lucide-react
 const GitlabIcon = () => (
@@ -64,16 +64,16 @@ const AppIntegration = () => {
 
   return (
     <div className="space-y-6">
-      <div className="flex justify-between items-center">
+      <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-bold text-gray-900">Integration & Deployment</h1>
-          <p className="text-gray-600 mt-1">Manage CI/CD integrations with GitHub and GitLab</p>
+          <p className="mt-1 text-gray-600">Manage CI/CD integrations with GitHub and GitLab</p>
         </div>
         <div>
           <button 
             onClick={saveIntegration}
             disabled={isLoading}
-            className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+            className="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
           >
             {isLoading ? (
               <RefreshCw size={16} className="mr-2 animate-spin" />
@@ -86,10 +86,10 @@ const AppIntegration = () => {
       </div>
 
       {showSuccessMessage && (
-        <div className="bg-green-50 border-l-4 border-green-400 p-4">
+        <div className="p-4 border-l-4 border-green-400 bg-green-50">
           <div className="flex">
             <div className="flex-shrink-0">
-              <svg className="h-5 w-5 text-green-400" viewBox="0 0 20 20" fill="currentColor">
+              <svg className="w-5 h-5 text-green-400" viewBox="0 0 20 20" fill="currentColor">
                 <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
               </svg>
             </div>
@@ -102,9 +102,9 @@ const AppIntegration = () => {
         </div>
       )}
 
-      <div className="bg-white shadow rounded-lg overflow-hidden">
+      <div className="overflow-hidden bg-white rounded-lg shadow">
         <div className="border-b border-gray-200">
-          <nav className="-mb-px flex">
+          <nav className="flex -mb-px">
             <button
               onClick={() => setActiveTab('github')}
               className={`${
@@ -124,7 +124,7 @@ const AppIntegration = () => {
                   : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
               } whitespace-nowrap py-4 px-6 border-b-2 font-medium text-sm flex items-center`}
             >
-              <GitlabIcon size={18} className="mr-2" />
+              <Gitlab size={18} className="mr-2" />
               GitLab Integration
             </button>
           </nav>
@@ -135,14 +135,14 @@ const AppIntegration = () => {
             <div className="space-y-6">
               <div className="flex items-center justify-between">
                 <div className="flex items-center">
-                  <Github size={24} className="text-gray-700 mr-2" />
+                  <Github size={24} className="mr-2 text-gray-700" />
                   <h3 className="text-lg font-medium text-gray-900">GitHub Integration</h3>
                 </div>
                 <div className="relative inline-block w-10 mr-2 align-middle select-none">
                   <input
                     type="checkbox"
                     id="github-toggle"
-                    className="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer"
+                    className="absolute block w-6 h-6 bg-white border-4 rounded-full appearance-none cursor-pointer toggle-checkbox"
                     checked={githubConfig.enabled}
                     onChange={() => setGithubConfig({...githubConfig, enabled: !githubConfig.enabled})}
                   />
@@ -160,14 +160,14 @@ const AppIntegration = () => {
                   <label htmlFor="github-repo" className="block text-sm font-medium text-gray-700">
                     GitHub Repository
                   </label>
-                  <div className="mt-1 flex rounded-md shadow-sm">
-                    <span className="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 sm:text-sm">
+                  <div className="flex mt-1 rounded-md shadow-sm">
+                    <span className="inline-flex items-center px-3 text-gray-500 border border-r-0 border-gray-300 rounded-l-md bg-gray-50 sm:text-sm">
                       github.com/
                     </span>
                     <input
                       type="text"
                       id="github-repo"
-                      className="flex-1 min-w-0 block w-full px-3 py-2 rounded-none rounded-r-md border border-gray-300 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                      className="flex-1 block w-full min-w-0 px-3 py-2 border border-gray-300 rounded-none rounded-r-md focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                       placeholder="username/repository"
                       value={githubConfig.repository}
                       onChange={(e) => setGithubConfig({...githubConfig, repository: e.target.value})}
@@ -180,14 +180,14 @@ const AppIntegration = () => {
                   <label htmlFor="github-branch" className="block text-sm font-medium text-gray-700">
                     Branch to Deploy
                   </label>
-                  <div className="mt-1 flex rounded-md shadow-sm">
-                    <span className="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 sm:text-sm">
+                  <div className="flex mt-1 rounded-md shadow-sm">
+                    <span className="inline-flex items-center px-3 text-gray-500 border border-r-0 border-gray-300 rounded-l-md bg-gray-50 sm:text-sm">
                       <GitBranch size={16} />
                     </span>
                     <input
                       type="text"
                       id="github-branch"
-                      className="flex-1 min-w-0 block w-full px-3 py-2 rounded-none rounded-r-md border border-gray-300 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                      className="flex-1 block w-full min-w-0 px-3 py-2 border border-gray-300 rounded-none rounded-r-md focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                       placeholder="main"
                       value={githubConfig.branch}
                       onChange={(e) => setGithubConfig({...githubConfig, branch: e.target.value})}
@@ -202,12 +202,12 @@ const AppIntegration = () => {
                   <input
                     id="github-autodeploy"
                     type="checkbox"
-                    className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                    className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                     checked={githubConfig.autoDeployEnabled}
                     onChange={() => setGithubConfig({...githubConfig, autoDeployEnabled: !githubConfig.autoDeployEnabled})}
                     disabled={!githubConfig.enabled}
                   />
-                  <label htmlFor="github-autodeploy" className="ml-2 block text-sm text-gray-900">
+                  <label htmlFor="github-autodeploy" className="block ml-2 text-sm text-gray-900">
                     Enable automatic deployments
                   </label>
                 </div>
@@ -217,12 +217,12 @@ const AppIntegration = () => {
                     <input
                       id="github-deploy-push"
                       type="checkbox"
-                      className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                      className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                       checked={githubConfig.deployOnPush}
                       onChange={() => setGithubConfig({...githubConfig, deployOnPush: !githubConfig.deployOnPush})}
                       disabled={!githubConfig.enabled || !githubConfig.autoDeployEnabled}
                     />
-                    <label htmlFor="github-deploy-push" className="ml-2 block text-sm text-gray-900">
+                    <label htmlFor="github-deploy-push" className="block ml-2 text-sm text-gray-900">
                       Deploy on push to {githubConfig.branch}
                     </label>
                   </div>
@@ -231,40 +231,40 @@ const AppIntegration = () => {
                     <input
                       id="github-deploy-pr"
                       type="checkbox"
-                      className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                      className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                       checked={githubConfig.deployOnPR}
                       onChange={() => setGithubConfig({...githubConfig, deployOnPR: !githubConfig.deployOnPR})}
                       disabled={!githubConfig.enabled || !githubConfig.autoDeployEnabled}
                     />
-                    <label htmlFor="github-deploy-pr" className="ml-2 block text-sm text-gray-900">
+                    <label htmlFor="github-deploy-pr" className="block ml-2 text-sm text-gray-900">
                       Deploy pull requests (preview environments)
                     </label>
                   </div>
                 </div>
               </div>
 
-              <div className="border-t border-gray-200 pt-4">
+              <div className="pt-4 border-t border-gray-200">
                 <h4 className="text-sm font-medium text-gray-900">Webhook Configuration</h4>
                 <p className="mt-1 text-sm text-gray-500">
                   Add this webhook to your GitHub repository settings to enable automatic deployments.
                 </p>
 
-                <div className="mt-3 grid grid-cols-1 gap-4 sm:grid-cols-2">
+                <div className="grid grid-cols-1 gap-4 mt-3 sm:grid-cols-2">
                   <div>
                     <label htmlFor="webhook-url" className="block text-sm font-medium text-gray-700">
                       Webhook URL
                     </label>
-                    <div className="mt-1 flex rounded-md shadow-sm">
+                    <div className="flex mt-1 rounded-md shadow-sm">
                       <input
                         type="text"
                         id="webhook-url"
-                        className="flex-1 min-w-0 block w-full px-3 py-2 rounded-md border border-gray-300 bg-gray-50 sm:text-sm"
+                        className="flex-1 block w-full min-w-0 px-3 py-2 border border-gray-300 rounded-md bg-gray-50 sm:text-sm"
                         value={githubConfig.webhookUrl}
                         readOnly
                       />
                       <button
                         type="button"
-                        className="ml-3 inline-flex items-center px-3 py-2 border border-gray-300 shadow-sm text-sm leading-4 font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                        className="inline-flex items-center px-3 py-2 ml-3 text-sm font-medium leading-4 text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
                         onClick={() => navigator.clipboard.writeText(githubConfig.webhookUrl)}
                       >
                         Copy
@@ -276,17 +276,17 @@ const AppIntegration = () => {
                     <label htmlFor="webhook-secret" className="block text-sm font-medium text-gray-700">
                       Webhook Secret
                     </label>
-                    <div className="mt-1 flex rounded-md shadow-sm">
+                    <div className="flex mt-1 rounded-md shadow-sm">
                       <input
                         type="text"
                         id="webhook-secret"
-                        className="flex-1 min-w-0 block w-full px-3 py-2 rounded-md border border-gray-300 bg-gray-50 sm:text-sm"
+                        className="flex-1 block w-full min-w-0 px-3 py-2 border border-gray-300 rounded-md bg-gray-50 sm:text-sm"
                         value={githubConfig.secretToken}
                         readOnly
                       />
                       <button
                         type="button"
-                        className="ml-3 inline-flex items-center px-3 py-2 border border-gray-300 shadow-sm text-sm leading-4 font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                        className="inline-flex items-center px-3 py-2 ml-3 text-sm font-medium leading-4 text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
                         onClick={generateToken}
                       >
                         Generate
@@ -312,14 +312,14 @@ const AppIntegration = () => {
             <div className="space-y-6">
               <div className="flex items-center justify-between">
                 <div className="flex items-center">
-                  <GitlabIcon size={24} className="text-gray-700 mr-2" />
+                  <Gitlab size={24} className="mr-2 text-gray-700" />
                   <h3 className="text-lg font-medium text-gray-900">GitLab Integration</h3>
                 </div>
                 <div className="relative inline-block w-10 mr-2 align-middle select-none">
                   <input
                     type="checkbox"
                     id="gitlab-toggle"
-                    className="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer"
+                    className="absolute block w-6 h-6 bg-white border-4 rounded-full appearance-none cursor-pointer toggle-checkbox"
                     checked={gitlabConfig.enabled}
                     onChange={() => setGitlabConfig({...gitlabConfig, enabled: !gitlabConfig.enabled})}
                   />
@@ -337,14 +337,14 @@ const AppIntegration = () => {
                   <label htmlFor="gitlab-repo" className="block text-sm font-medium text-gray-700">
                     GitLab Repository
                   </label>
-                  <div className="mt-1 flex rounded-md shadow-sm">
-                    <span className="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 sm:text-sm">
+                  <div className="flex mt-1 rounded-md shadow-sm">
+                    <span className="inline-flex items-center px-3 text-gray-500 border border-r-0 border-gray-300 rounded-l-md bg-gray-50 sm:text-sm">
                       gitlab.com/
                     </span>
                     <input
                       type="text"
                       id="gitlab-repo"
-                      className="flex-1 min-w-0 block w-full px-3 py-2 rounded-none rounded-r-md border border-gray-300 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                      className="flex-1 block w-full min-w-0 px-3 py-2 border border-gray-300 rounded-none rounded-r-md focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                       placeholder="username/repository"
                       value={gitlabConfig.repository}
                       onChange={(e) => setGitlabConfig({...gitlabConfig, repository: e.target.value})}
@@ -357,14 +357,14 @@ const AppIntegration = () => {
                   <label htmlFor="gitlab-branch" className="block text-sm font-medium text-gray-700">
                     Branch to Deploy
                   </label>
-                  <div className="mt-1 flex rounded-md shadow-sm">
-                    <span className="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 sm:text-sm">
+                  <div className="flex mt-1 rounded-md shadow-sm">
+                    <span className="inline-flex items-center px-3 text-gray-500 border border-r-0 border-gray-300 rounded-l-md bg-gray-50 sm:text-sm">
                       <GitBranch size={16} />
                     </span>
                     <input
                       type="text"
                       id="gitlab-branch"
-                      className="flex-1 min-w-0 block w-full px-3 py-2 rounded-none rounded-r-md border border-gray-300 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                      className="flex-1 block w-full min-w-0 px-3 py-2 border border-gray-300 rounded-none rounded-r-md focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                       placeholder="main"
                       value={gitlabConfig.branch}
                       onChange={(e) => setGitlabConfig({...gitlabConfig, branch: e.target.value})}
@@ -379,12 +379,12 @@ const AppIntegration = () => {
                   <input
                     id="gitlab-autodeploy"
                     type="checkbox"
-                    className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                    className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                     checked={gitlabConfig.autoDeployEnabled}
                     onChange={() => setGitlabConfig({...gitlabConfig, autoDeployEnabled: !gitlabConfig.autoDeployEnabled})}
                     disabled={!gitlabConfig.enabled}
                   />
-                  <label htmlFor="gitlab-autodeploy" className="ml-2 block text-sm text-gray-900">
+                  <label htmlFor="gitlab-autodeploy" className="block ml-2 text-sm text-gray-900">
                     Enable automatic deployments
                   </label>
                 </div>
@@ -394,12 +394,12 @@ const AppIntegration = () => {
                     <input
                       id="gitlab-deploy-push"
                       type="checkbox"
-                      className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                      className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                       checked={gitlabConfig.deployOnPush}
                       onChange={() => setGitlabConfig({...gitlabConfig, deployOnPush: !gitlabConfig.deployOnPush})}
                       disabled={!gitlabConfig.enabled || !gitlabConfig.autoDeployEnabled}
                     />
-                    <label htmlFor="gitlab-deploy-push" className="ml-2 block text-sm text-gray-900">
+                    <label htmlFor="gitlab-deploy-push" className="block ml-2 text-sm text-gray-900">
                       Deploy on push to {gitlabConfig.branch}
                     </label>
                   </div>
@@ -408,40 +408,40 @@ const AppIntegration = () => {
                     <input
                       id="gitlab-deploy-mr"
                       type="checkbox"
-                      className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                      className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                       checked={gitlabConfig.deployOnMR}
                       onChange={() => setGitlabConfig({...gitlabConfig, deployOnMR: !gitlabConfig.deployOnMR})}
                       disabled={!gitlabConfig.enabled || !gitlabConfig.autoDeployEnabled}
                     />
-                    <label htmlFor="gitlab-deploy-mr" className="ml-2 block text-sm text-gray-900">
+                    <label htmlFor="gitlab-deploy-mr" className="block ml-2 text-sm text-gray-900">
                       Deploy merge requests (preview environments)
                     </label>
                   </div>
                 </div>
               </div>
 
-              <div className="border-t border-gray-200 pt-4">
+              <div className="pt-4 border-t border-gray-200">
                 <h4 className="text-sm font-medium text-gray-900">Webhook Configuration</h4>
                 <p className="mt-1 text-sm text-gray-500">
                   Add this webhook to your GitLab repository settings to enable automatic deployments.
                 </p>
 
-                <div className="mt-3 grid grid-cols-1 gap-4 sm:grid-cols-2">
+                <div className="grid grid-cols-1 gap-4 mt-3 sm:grid-cols-2">
                   <div>
                     <label htmlFor="gitlab-webhook-url" className="block text-sm font-medium text-gray-700">
                       Webhook URL
                     </label>
-                    <div className="mt-1 flex rounded-md shadow-sm">
+                    <div className="flex mt-1 rounded-md shadow-sm">
                       <input
                         type="text"
                         id="gitlab-webhook-url"
-                        className="flex-1 min-w-0 block w-full px-3 py-2 rounded-md border border-gray-300 bg-gray-50 sm:text-sm"
+                        className="flex-1 block w-full min-w-0 px-3 py-2 border border-gray-300 rounded-md bg-gray-50 sm:text-sm"
                         value={gitlabConfig.webhookUrl}
                         readOnly
                       />
                       <button
                         type="button"
-                        className="ml-3 inline-flex items-center px-3 py-2 border border-gray-300 shadow-sm text-sm leading-4 font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                        className="inline-flex items-center px-3 py-2 ml-3 text-sm font-medium leading-4 text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
                         onClick={() => navigator.clipboard.writeText(gitlabConfig.webhookUrl)}
                       >
                         Copy
@@ -453,17 +453,17 @@ const AppIntegration = () => {
                     <label htmlFor="gitlab-webhook-secret" className="block text-sm font-medium text-gray-700">
                       Webhook Secret Token
                     </label>
-                    <div className="mt-1 flex rounded-md shadow-sm">
+                    <div className="flex mt-1 rounded-md shadow-sm">
                       <input
                         type="text"
                         id="gitlab-webhook-secret"
-                        className="flex-1 min-w-0 block w-full px-3 py-2 rounded-md border border-gray-300 bg-gray-50 sm:text-sm"
+                        className="flex-1 block w-full min-w-0 px-3 py-2 border border-gray-300 rounded-md bg-gray-50 sm:text-sm"
                         value={gitlabConfig.secretToken}
                         readOnly
                       />
                       <button
                         type="button"
-                        className="ml-3 inline-flex items-center px-3 py-2 border border-gray-300 shadow-sm text-sm leading-4 font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                        className="inline-flex items-center px-3 py-2 ml-3 text-sm font-medium leading-4 text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
                         onClick={generateToken}
                       >
                         Generate

@@ -85,6 +85,7 @@ const router = createBrowserRouter([
           { path: 'features', element: <FeaturesPage /> },
         ],
       },
+      { path: 'documentation', element: <Documentation /> },
       {
         path: '/dashboard',
         element: <DashboardLayout />,
@@ -103,7 +104,6 @@ const router = createBrowserRouter([
           { path: 'support', element: <Support /> },
           { path: 'announcements', element: <Announcements /> },
           { path: 'announcements/:announcementId', element: <AnnouncementDetail /> },
-          { path: 'documentation', element: <Documentation /> },
         ],
       },
       {
