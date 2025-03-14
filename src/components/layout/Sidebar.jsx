@@ -10,22 +10,20 @@ import {
   Settings, 
   Shield, 
   HelpCircle,
-  LogOut,
-  FileText
+  LogOut
 } from 'lucide-react';
 
 const Sidebar = () => {
   const navItems = [
     { name: 'Dashboard', icon: <LayoutDashboard size={20} />, path: '/dashboard' },
-    { name: 'Projects', icon: <Boxes size={20} />, path: '/projects' },
-    { name: 'Team', icon: <Users size={20} />, path: '/team' },
-    { name: 'Analytics', icon: <BarChart2 size={20} />, path: '/analytics' },
-    { name: 'Activity', icon: <Clock size={20} />, path: '/activity' },
-    { name: 'Billing', icon: <CreditCard size={20} />, path: '/billing' },
-    { name: 'Documentation', icon: <FileText size={20} />, path: '/documentation' },
-    { name: 'Settings', icon: <Settings size={20} />, path: '/settings' },
-    { name: 'Security', icon: <Shield size={20} />, path: '/security' },
-    { name: 'Support', icon: <HelpCircle size={20} />, path: '/support' },
+    { name: 'Projects', icon: <Boxes size={20} />, path: '/dashboard/projects' },
+    { name: 'Team', icon: <Users size={20} />, path: '/dashboard/team' },
+    { name: 'Analytics', icon: <BarChart2 size={20} />, path: '/dashboard/analytics' },
+    { name: 'Activity', icon: <Clock size={20} />, path: '/dashboard/activity' },
+    { name: 'Billing', icon: <CreditCard size={20} />, path: '/dashboard/billing' },
+    { name: 'Settings', icon: <Settings size={20} />, path: '/dashboard/settings' },
+    { name: 'Security', icon: <Shield size={20} />, path: '/dashboard/security' },
+    { name: 'Support', icon: <HelpCircle size={20} />, path: '/dashboard/support' },
   ];
 
   return (

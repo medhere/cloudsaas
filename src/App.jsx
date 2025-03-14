@@ -1,5 +1,6 @@
 import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
+import DashboardLayout from './components/layout/DashboardLayout';
 import MainLayout from './components/layout/MainLayout';
 import Dashboard from './pages/Dashboard';
 import Projects from './pages/Projects';
@@ -15,13 +16,26 @@ import Security from './pages/Security';
 import Support from './pages/Support';
 import Announcements from './pages/Announcements';
 import AnnouncementDetail from './pages/AnnouncementDetail';
+import Documentation from './pages/Documentation';
+import HomePage from './pages/HomePage';
+import AuthPage from './pages/AuthPage';
+import PricingPage from './pages/PricingPage';
+import FeaturesPage from './pages/FeaturesPage';
 
 function App() {
   return (
     <Routes>
+      {/* Home Pages with Floating Top Menu */}
       <Route path="/" element={<MainLayout />}>
-        <Route index element={<Navigate to="/dashboard" replace />} />
-        <Route path="dashboard" element={<Dashboard />} />
+        <Route index element={<HomePage />} />
+        <Route path="auth" element={<AuthPage />} />
+        <Route path="pricing" element={<PricingPage />} />
+        <Route path="features" element={<FeaturesPage />} />
+      </Route>
+      
+      {/* Dashboard Pages with Sidebar */}
+      <Route path="/dashboard" element={<DashboardLayout />}>
+        <Route index element={<Dashboard />} />
         <Route path="projects" element={<Projects />} />
         <Route path="projects/create" element={<ProjectCreate />} />
         <Route path="team" element={<TeamManagement />} />
@@ -36,6 +50,9 @@ function App() {
         <Route path="support/announcements" element={<Announcements />} />
         <Route path="support/announcements/:id" element={<AnnouncementDetail />} />
       </Route>
+      
+      {/* Documentation as a standalone section */}
+      <Route path="/documentation/*" element={<Documentation />} />
     </Routes>
   );
 }
