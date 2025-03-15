@@ -1,0 +1,236 @@
+// dokku ver 0.34.4
+//command && echo ##success || echo ##failed
+
+const appManagement = {
+    appCreate: 'dokku apps:create <app>', 
+    appDestroy: 'dokku --force apps:destroy <app>',
+    // clone: 'dokku apps:clone <old-app> <new-app>'
+    appExists: 'dokku apps:exists <app>', //if app does not exist, it returns non-zero 'failed' which is ok for checking app before creation or use db check or parse string for 'App appname does not exist'
+    appListAdmin: 'dokku --quiet apps:list',
+    appLock: 'dokku apps:lock <app>',
+    appUnlock: 'dokku apps:unlock <app>',
+    appLockStatus: 'dokku apps:locked <app>', //returns non-zero 'failed' which is ok, check db, or parse string for 'Deploy lock does not exist'
+    appReport: 'dokku apps:report [<app>]',
+
+    //logs management
+    appLogs: 'dokkue logs <app> [-t|--tail] [-n|--num num] [-q|--quiet] [-p|--ps process]', //stream response to FE
+    appLogsFailed: 'dokku logs:failed <app>',                                                    
+    appLogsReport: 'dokku logs:report [<app>]',
+
+    //enter container
+    appCommand: 'dokku enter app process.1 runcommand', //dokku enter app process python script/background-worker.py
+
+    //process Management
+    appRebuild: 'dokku ps:rebuild [--parallel count] [--all|<app>]',
+    appRestart: 'dokku ps:restart [--parallel count] [--all|<app>]  [<process-name>]',
+    appRestore: 'dokku ps:restore [<app>]',
+    appScale: 'dokku ps:scale [--skip-deploy] <app> <proc>=<count> [<proc>=<count>...]',
+    appSet: 'dokku ps:set <app> <key> <value>', //dokku ps:set node-js-app restart-policy always|no|unless-stopped|on-failure|on-failure:20
+    appStart: 'dokku ps:start [--parallel count] [--all|<app>]',
+    appStop: 'dokku ps:stop [--parallel count] [--all|<app>]',
+    appInspect: 'dokku ps:inspect <app>',
+    appReport: 'dokku ps:report [<app>] [<flag>]',
+
+    //repo management
+    appRepoGC: 'dokku repo:gc <app>', //TODO read up on this
+    appRepoPurge: 'dokku repo:purge-cache <app>',
+
+
+    //resource Management //TODO:read more on usage
+    appResourceLimit: 'dokku resource:limit <app>',
+    appResourceLimitSet: 'dokku resource:limit --cpu {val} --memory {val} --memory-swap {val} --network {val} --network-ingress {val} --network-egress {val} <app>',
+    appResourceLimitClear: 'dokku resource:limit --cpu|--memory|--memory-swap|--network|--network-ingress|--network-egress <app>',
+    appResourceLimitClearAll: 'dokku resource:limit-clear <app>',
+    appResourceReserve: 'dokku resource:reserve <app>',
+    appResourceReserveSet: 'dokku resource:reserve --cpu {val} --memory {val} --memory-swap {val} --network {val} --network-ingress {val} --network-egress {val} <app>',
+    appResourceReserveClear: 'dokku resource:reserve --cpu|--memory|--memory-swap|--network|--network-ingress|--network-egress <app>',
+    appResourceReserveClearAll: 'dokku resource:reserve-clear <app>',
+    appResourceReport: 'dokku resource:report [<app>] [<flag>]',
+
+
+}
+
+const networkManagement = {
+    netCreate: 'dokku network:create <network>',
+    netDestroy: 'dokku network:destroy --force <network>',
+    netExists: 'dokku network:exists <network>',
+    netInfo: 'dokku network:info <network>',
+    netList: 'dokku network:list',  //use db to store network created per user, create network with username concat
+    netReport: 'dokku network:report [<app>] [<flag>]',
+    netRebuild: 'dokku network:rebuild <app>',
+        //TODO read on which best to use
+    netAttachPostCreateSet: 'dokku network:set node-js-app attach-post-create [net1...]', //APP.PROC_TYPE is the internal DNS for app, node-js-app.web
+    netAttachPostCreateClear: 'dokku network:set node-js-app attach-post-create',
+    netAttachPostDeploySet: 'dokku network:set node-js-app attach-post-deploy [net1...]',
+    netAttachPostDeployClear: 'dokku network:set node-js-app attach-post-deploy',
+    netInitSet: 'dokku network:set node-js-app initial-network global-network',
+    netInitClear: 'dokku network:set node-js-app initial-network',
+    
+    netPortsList: 'dokku ports:list <app>',
+    netPortsAdd: 'dokku ports:add <app> [<scheme>:<host-port>:<container-port>...]',
+    netPortsClear: 'dokku ports:clear <app>',
+    netPortsRemove: 'dokku ports:remove <app> <host-port> [<host-port>|<scheme>:<host-port>:<container-port>...]',
+    netPortsSet: 'dokku ports:set <app> [<scheme>:<host-port>:<container-port>...]', //force set
+    netPortsSetNginx: 'dokku proxy:set node-js-app nginx'
+
+}
+
+
+const userManagement = {
+    userPubKeysAdd: 'dokku ssh-keys:add <username> [/path/to/key]',
+    userPubKeyEcho: `echo 'CONTENTS_OF_ID_RSA_PUB_FILE' | dokku ssh-keys:add username`,
+    userPubKeyList: 'dokku ssh-keys:list --format json [<username>]',
+    userPubKeyRemove: 'dokku ssh-keys:remove <username>',
+
+    userAppAccessAdd: 'dokku acl:add <app> <user>', //can add multiuser to push/pull/view/manage app as team
+    userAppAccessAllowed: 'dokku acl:allowed <user>',
+    userAppAccessList: 'dokku acl:list <app>',
+    userAppAccessRemove: 'dokku acl:remove <app> <user>',
+
+    // userServiceAccess: 'dokku acl:add-service <type> <service> <user>',
+    // userServiceAccess: 'dokku acl:allowed-service <type> <user>',
+    // userServiceAccess: 'dokku acl:list-service <type> <service>',
+    // userServiceAccess: 'dokku acl:remove-service <type> <service> <user>'
+
+}
+
+const builderManagement = {
+    builderReport: 'dokku builder:report [<app>] [<flag>]',
+    builderSet: 'dokku builder:set <app> selected dockerfile', //dockerfile, herokuish, lambda, nixpacks(must be installed), pack(must be installed)
+    // builderClear: 'dokku builder:set <app> selected',
+    builderClear: 'dokku builder:set <app> selected && dokku ports:clear <app>',
+
+    cloudNativeReport: 'builder-pack:report [<app>] [<flag>]',
+    // cloudNativePathSet: 'dokku builder-pack:set node-js-app projecttoml-path <pathtoproject.toml>',
+    // cloudNativePathClear: 'dokku builder-pack:set node-js-app projecttoml-path',    
+
+    herokBuildpackAdd: 'dokku buildpacks:add [--index 1] <app> <buildpack>', //dokku buildpacks:set app https://github.com/heroku/heroku-buildpack-nodejs#latest
+    herokBuildpackClear: 'dokku buildpacks:clear <app>',
+    herokBuildpackList: 'dokku buildpacks:list <app>',
+    // herokBuildpackRemove: 'dokku buildpacks:remove <app> <buildpack>',
+    herokBuildpackRemove: 'dokku buildpacks:remove [--index 1] <app>',
+    herokBuildpackReport: 'dokku buildpacks:report [<app>] [<flag>]',
+
+    dockerfileReport: 'dokku builder-dockerfile:report [<app>] [<flag>]',
+    // dockerfilePathSet: 'dokku builder-dockerfile:set app dockerfile-path <pathtodockerfile>', //inside repo
+    // dockerfilePathClear: 'dokku builder-dockerfile:set app dockerfile-path'
+
+    lambdaFuncsReport: 'dokku builder-lambda:report [<app>] [<flag>]',
+    // lambdaFuncsPathSet: 'dokku builder-lambda:set app lambdayml-path <pathtolambda.yml>',
+    // lambdaFuncsPathClear: 'dokku builder-lambda:set app lambdayml-path'
+
+    nixpacksReport: 'dokku builder-nixpacks:report [<app>] [<flag>]',
+    nixpacksPathSet: 'dokku builder-nixpacks:set node-js-app nixpackstoml-path <pathtonixpacks2.toml>',
+    nixpacksPathClear: 'dokku builder-nixpacks:set node-js-app nixpackstoml-path',
+    nixpacksCacheSet: 'dokku builder-nixpacks:set node-js-app no-cache true',
+    nixpacksCacheClear: 'dokku builder-nixpacks:set node-js-app no-cache'
+
+}
+
+
+const deployManagement ={
+    gitDeployInit: 'dokku git:initialize <app>', //use after dokku apps:create
+    gitDeployRemoteZip: 'dokku git:from-archive --archive-type zip <app> <archive-url.zip> [<git-username> <git-email>]', // Updates an app's git repository with a given archive file
+    // gitDeployRemoteZip: 'curl -sSL -L --limit-rate 1M -o "<renamezip.zip>" "<archive-url.zip>" | dokku git:from-archive --archive-type zip <app> --', // Updates an app's git repository with a given archive file, always delete zip file
+    // gitDeployLocalZip: '<location/archive.zip> | dokku git:from-archive --archive-type zip <app> --', // Updates an app's git repository with a given archive file
+    gitDeployDockerImage: 'dokku git:from-image [--build-dir DIRECTORY] <app> <docker-image> [<git-username> <git-email>]', //useful for predefined public docker images, refer to registry management for private images
+    gitDeployPublicRepo: 'dokku git:sync --build node-js-app https://github.com/heroku/node-js-getting-started.git <?branch, tag, commit>',
+    //TODO: check how to allow deployment from private repo
+    // gitDeploy: 'dokku git:allow-host <host>',
+    // gitDeploy: 'dokku git:auth <host> [<username> <password|PAT>]',
+    // gitDeploy: 'dokku git:sync [--build|build-if-changes] <app> <repository> [<git-ref>]',
+    //dokku git:from-image node-js-app my-registry/node-js-getting-started:latest
+    gitDeployReport: 'dokku git:report [<app>] [<flag>]',
+    gitDeployPropSet: 'dokku git:set <app> <key> (<value>)',
+    gitDeployPropClear: 'dokku git:set <app> <key> (<value>)',
+}
+
+
+const envManagement = {
+    envShow: 'dokku config:show (<app>|--global)',
+    envClearAll: 'dokku config:clear (<app>|--global)',
+    envExport: 'dokku config:export (<app>|--global) [--envfile]  --format [shell,json]',
+    envGet: 'dokku config:get (<app>|--global) KEY',
+    envKeys: 'dokku config:keys (<app>|--global) [--merged]',
+    envSet: 'dokku config:set [--encoded] [--no-restart] (<app>|--global) KEY1=VALUE1 [KEY2=VALUE2 ...]', //KEY="VAL\ WITH\ SPACES"    //via ssh
+    envClear: 'dokku config:unset [--no-restart] (<app>|--global) KEY1 [KEY2 ...]'
+
+}
+
+
+const domainManagement = {
+    domainAdd: 'dokku domains:add <app> <domain> [<domain> ...]',
+    domainSet: 'dokku domains:set <app> <domain> [<domain> ...]',
+    domainClear: 'dokku domains:clear <app>',
+    domainRemove: 'dokku domains:remove <app> <domain> [<domain> ...]',
+    domainEnable: 'dokku domains:enable <app>',
+    domainDisable: 'dokku domains:disable <app>',
+    domainReport: 'dokku domains:report [<app>|--global] [<flag>]'
+}
+
+const sslManagement = {
+    sslAdd: 'dokku certs:add <app> CRT KEY',
+    sslRemove: 'dokku certs:remove <app>',
+    sslShow: 'dokku certs:show <app> <crt|key>',
+    sslUpdate: 'dokku certs:update <app> CRT KEY',
+    sslReport: 'dokku certs:report [<app>] [<flag>]',
+}
+
+
+const cronTasks = {
+    cronList: 'dokku cron:list <app> [--format json|stdout]',
+    cronReport: 'dokku cron:report [<app>] [<flag>]',
+    cronRun: 'dokku cron:run <app> <cron_id> [--detach]',
+    cronMailtoSet: 'dokku cron:set <app> mailto example@example.com',
+    cronMailtoClear: 'dokku cron:set <app> mailto'
+}
+
+
+const proxyManagement ={
+    proxyBuild: 'dokku proxy:build-config <app>',
+    proxyClear: 'dokku proxy:clear-config <app>',
+    proxyEnable: 'dokku proxy:enable <app>',
+    proxyDisable: 'dokku proxy:disable <app>',
+    proxyReport: 'dokku proxy:report [<app>] [<flag>]',
+    proxySetNginx: 'dokku proxy:set node-js-app nginx',
+
+    nginxAccessLogs: 'dokku nginx:access-logs <app> [-t]',
+    nginxErrorLogs: 'dokku nginx:error-logs <app> [-t]',
+    nginxReport: 'dokku nginx:report [<app>] [<flag>]',
+    nginxShowConfig: 'dokku nginx:show-config <app>',
+    nginxValidateConfig: 'dokku nginx:validate-config [<app>] [--clean]',
+    nginxStart: 'dokku nginx:start',
+    nginxStop: 'dokku nginx:stop',
+    // nginxSet: 'dokku nginx:set <app> <property> (<value>)',
+    nginxDisableConfig: 'dokku nginx:set node-js-app disable-custom-config false',
+    nginxEnableConfig: 'dokku nginx:set node-js-app disable-custom-config true'
+
+    // nginxImportSSL: 'dokku nginx:import-ssl <app> < certs.tar' //check this
+
+}
+
+
+const containerConfig ={
+
+    containerStorageMount: 'dokku storage:mount <app> <host-dir:container-dir> && dokku ps:restart app-name',
+    containerStorageUnmount: 'dokku storage:unmount <app> <host-dir:container-dir> && dokku ps:restart app-name',
+    containerStorageList: 'dokku storage:list <app> [--format text|json]',
+    containerStorageReport: 'dokku storage:report [<app>] [<flag>]',
+    containerStorageDir: 'dokku storage:ensure-directory [--chown option] <directory>', //--chown herokuish|heroku|packeto|root|false
+
+    containerOptionAdd: 'dokku docker-options:add <app> <phase(s)> OPTION', //build "",deploy"",run ""(comma-separated phase list)
+    containerOptionClear: 'dokku docker-options:clear <app> [<phase(s)>...]',
+    containerOptionRemove: 'dokku docker-options:remove <app> <phase(s)> OPTION',
+    containerOptionReport: 'dokku docker-options:report [<app>] [<flag>]'
+}
+
+const pluginManagement = {
+    pluginInstall: 'dokku plugin:install [--core|--git-url] [--committish branch|commit|tag] [--name custom-plugin-name]',
+    pluginUninstall: 'dokku plugin:uninstall <name>',
+    pluginInstalled: 'dokku plugin:installed <name>',
+    pluginUpdate: 'dokku plugin:update [name [branch|commit|tag]]',   
+    pluginList: 'dokku plugin:list',
+    pluginDisable: 'dokku plugin:disable <name>',
+    pluginEnable: 'dokku plugin:enable <name>',
+    pluginDeps: 'dokku plugin:install-dependencies [--core]',
+}
