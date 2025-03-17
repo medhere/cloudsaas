@@ -24,7 +24,7 @@ const TeamManagement = () => {
   ];
 
   const handleOpenInvitePage = () => {
-    navigate('/team/invite');
+    navigate('./invite');
   };
 
   const handleOpenUpdateModal = (member) => {
@@ -50,10 +50,10 @@ const TeamManagement = () => {
 
   return (
     <div className="space-y-6">
-      <div className="flex justify-between items-center">
+      <div className="flex items-center justify-between">
         <h1 className="text-2xl font-bold">Team Management</h1>
         <button 
-          className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md flex items-center gap-2"
+          className="flex items-center gap-2 px-4 py-2 text-white bg-blue-600 rounded-md hover:bg-blue-700"
           onClick={handleOpenInvitePage}
         >
           <UserPlus size={18} />
@@ -62,29 +62,29 @@ const TeamManagement = () => {
       </div>
       
       {/* Teams You Belong To */}
-      <div className="bg-white rounded-lg shadow overflow-hidden">
+      <div className="overflow-hidden bg-white rounded-lg shadow">
         <div className="p-6 border-b border-gray-200">
           <h2 className="text-lg font-semibold">Teams You Belong To</h2>
-          <p className="text-sm text-gray-500 mt-1">Teams that you have been invited to or are a member of</p>
+          <p className="mt-1 text-sm text-gray-500">Teams that you have been invited to or are a member of</p>
         </div>
         
         <div className="overflow-x-auto">
           <table className="min-w-full divide-y divide-gray-200">
             <thead className="bg-gray-50">
               <tr>
-                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th scope="col" className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                   Team Name
                 </th>
-                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th scope="col" className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                   Owner
                 </th>
-                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th scope="col" className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                   Status
                 </th>
-                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th scope="col" className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                   Joined Date
                 </th>
-                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th scope="col" className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                   Actions
                 </th>
               </tr>
@@ -95,7 +95,7 @@ const TeamManagement = () => {
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="text-sm font-medium text-gray-900">{team.name}</div>
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                  <td className="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
                     {team.owner}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
@@ -105,10 +105,10 @@ const TeamManagement = () => {
                       {team.status}
                     </span>
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                  <td className="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
                     {team.joinedDate}
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                  <td className="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
                     <div className="flex items-center space-x-3">
                       {team.status === 'Pending' ? (
                         <>
@@ -134,29 +134,29 @@ const TeamManagement = () => {
       </div>
       
       {/* Team Members */}
-      <div className="bg-white rounded-lg shadow overflow-hidden">
+      <div className="overflow-hidden bg-white rounded-lg shadow">
         <div className="p-6 border-b border-gray-200">
           <h2 className="text-lg font-semibold">Your Team Members</h2>
-          <p className="text-sm text-gray-500 mt-1">Manage members of your team and their access rights</p>
+          <p className="mt-1 text-sm text-gray-500">Manage members of your team and their access rights</p>
         </div>
         
         <div className="overflow-x-auto">
           <table className="min-w-full divide-y divide-gray-200">
             <thead className="bg-gray-50">
               <tr>
-                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th scope="col" className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                   Name
                 </th>
-                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th scope="col" className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                   Role
                 </th>
-                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th scope="col" className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                   Status
                 </th>
-                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th scope="col" className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                   Last Active
                 </th>
-                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th scope="col" className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                   Actions
                 </th>
               </tr>
@@ -166,7 +166,7 @@ const TeamManagement = () => {
                 <tr key={member.id} className="hover:bg-gray-50">
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="flex items-center">
-                      <div className="h-10 w-10 rounded-full bg-gray-200 flex items-center justify-center text-gray-600 font-medium">
+                      <div className="flex items-center justify-center w-10 h-10 font-medium text-gray-600 bg-gray-200 rounded-full">
                         {member.name.split(' ').map(n => n[0]).join('')}
                       </div>
                       <div className="ml-4">
@@ -178,7 +178,7 @@ const TeamManagement = () => {
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="flex items-center">
                       {getRoleIcon(member.role)}
-                      <span className="text-sm text-gray-900 ml-2">{member.role}</span>
+                      <span className="ml-2 text-sm text-gray-900">{member.role}</span>
                     </div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
@@ -188,10 +188,10 @@ const TeamManagement = () => {
                       {member.status}
                     </span>
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                  <td className="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
                     {member.lastActive}
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                  <td className="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
                     <div className="flex items-center space-x-3">
                       <button 
                         className="text-blue-500 hover:text-blue-700"
@@ -216,16 +216,16 @@ const TeamManagement = () => {
       </div>
       
       {/* Roles and Permissions */}
-      <div className="bg-white rounded-lg shadow overflow-hidden">
+      <div className="overflow-hidden bg-white rounded-lg shadow">
         <div className="p-6">
-          <div className="flex justify-between items-center">
+          <div className="flex items-center justify-between">
             <div>
               <h2 className="text-lg font-semibold">Roles and Permissions</h2>
-              <p className="text-sm text-gray-500 mt-1">Learn about the different roles and their permissions</p>
+              <p className="mt-1 text-sm text-gray-500">Learn about the different roles and their permissions</p>
             </div>
             <Link 
               to="/support" 
-              className="text-blue-600 hover:text-blue-800 flex items-center gap-1"
+              className="flex items-center gap-1 text-blue-600 hover:text-blue-800"
             >
               <span>View Documentation</span>
               <ExternalLink size={16} />

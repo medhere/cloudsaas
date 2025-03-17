@@ -11,9 +11,9 @@ const ProjectKeys = () => {
   
   // Mock data for SSH keys
   const [sshKeys, setSshKeys] = useState([
-    { id: 1, name: 'Development Key', fingerprint: 'SHA256:uNgDHbP9nK8pZ7z+YHrXUFYvZ3NcA+5D9M2HZ8', added: 'Nov 10, 2023', lastUsed: '2 hours ago' },
-    { id: 2, name: 'Deployment Key', fingerprint: 'SHA256:7FtP5jK8nZ9pZ7z+YHrXUFYvZ3NcA+5D9M2HZ8', added: 'Oct 15, 2023', lastUsed: '1 day ago' },
-    { id: 3, name: 'CI/CD Key', fingerprint: 'SHA256:9HtP5jK8nZ9pZ7z+YHrXUFYvZ3NcA+5D9M2HZ8', added: 'Sep 20, 2023', lastUsed: '5 days ago' },
+    { id: 1, name: 'Development Key', fingerprint: 'SHA256:uNgDHbP9nK8pZ7z+YHrXUFYvZ3NcA+5D9M2HZ8', added: 'Nov 10, 2023' },
+    { id: 2, name: 'Deployment Key', fingerprint: 'SHA256:7FtP5jK8nZ9pZ7z+YHrXUFYvZ3NcA+5D9M2HZ8', added: 'Oct 15, 2023' },
+    { id: 3, name: 'CI/CD Key', fingerprint: 'SHA256:9HtP5jK8nZ9pZ7z+YHrXUFYvZ3NcA+5D9M2HZ8', added: 'Sep 20, 2023' },
   ]);
   
   const handleAddKey = (e) => {
@@ -24,7 +24,6 @@ const ProjectKeys = () => {
         name: newKeyName,
         fingerprint: `SHA256:${newKeyValue.substring(0, 30)}...`,
         added: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
-        lastUsed: 'Never'
       };
       setSshKeys([...sshKeys, newKey]);
       setNewKeyName('');
@@ -51,11 +50,11 @@ const ProjectKeys = () => {
   
   return (
     <div className="space-y-6">
-      <div className="flex justify-between items-center">
+      <div className="flex items-center justify-between">
         <h1 className="text-2xl font-bold">SSH Keys: {projectId}</h1>
         <button 
           onClick={() => setShowAddKeyForm(!showAddKeyForm)}
-          className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md flex items-center gap-2"
+          className="flex items-center gap-2 px-4 py-2 text-white bg-blue-600 rounded-md hover:bg-blue-700"
         >
           <Plus size={18} />
           <span>Add SSH Key</span>
@@ -64,11 +63,11 @@ const ProjectKeys = () => {
       
       {/* Add Key Form */}
       {showAddKeyForm && (
-        <div className="bg-white rounded-lg shadow p-6">
-          <h2 className="text-lg font-semibold mb-4">Add New SSH Key</h2>
+        <div className="p-6 bg-white rounded-lg shadow">
+          <h2 className="mb-4 text-lg font-semibold">Add New SSH Key</h2>
           <form onSubmit={handleAddKey}>
             <div className="mb-4">
-              <label htmlFor="keyName" className="block text-sm font-medium text-gray-700 mb-1">
+              <label htmlFor="keyName" className="block mb-1 text-sm font-medium text-gray-700">
                 Key Name
               </label>
               <input
@@ -83,7 +82,7 @@ const ProjectKeys = () => {
             </div>
             
             <div className="mb-4">
-              <label htmlFor="keyValue" className="block text-sm font-medium text-gray-700 mb-1">
+              <label htmlFor="keyValue" className="block mb-1 text-sm font-medium text-gray-700">
                 Public Key
               </label>
               <textarea
@@ -104,13 +103,13 @@ const ProjectKeys = () => {
               <button
                 type="button"
                 onClick={() => setShowAddKeyForm(false)}
-                className="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50"
+                className="px-4 py-2 text-gray-700 border border-gray-300 rounded-md hover:bg-gray-50"
               >
                 Cancel
               </button>
               <button
                 type="submit"
-                className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+                className="px-4 py-2 text-white bg-blue-600 rounded-md hover:bg-blue-700"
               >
                 Add Key
               </button>
@@ -120,23 +119,20 @@ const ProjectKeys = () => {
       )}
       
       {/* SSH Keys List */}
-      <div className="bg-white rounded-lg shadow overflow-hidden">
+      <div className="overflow-hidden bg-white rounded-lg shadow">
         <table className="min-w-full divide-y divide-gray-200">
           <thead className="bg-gray-50">
             <tr>
-              <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th scope="col" className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                 Name
               </th>
-              <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th scope="col" className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                 Fingerprint
               </th>
-              <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th scope="col" className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                 Added
               </th>
-              <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Last Used
-              </th>
-              <th scope="col" className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+              <th scope="col" className="px-6 py-3 text-xs font-medium tracking-wider text-right text-gray-500 uppercase">
                 Actions
               </th>
             </tr>
@@ -146,20 +142,17 @@ const ProjectKeys = () => {
               <tr key={key.id}>
                 <td className="px-6 py-4 whitespace-nowrap">
                   <div className="flex items-center">
-                    <Key className="text-gray-500 mr-2" size={18} />
+                    <Key className="mr-2 text-gray-500" size={18} />
                     <div className="text-sm font-medium text-gray-900">{key.name}</div>
                   </div>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="text-sm text-gray-500 font-mono">{key.fingerprint}</div>
+                  <div className="font-mono text-sm text-gray-500">{key.fingerprint}</div>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
                   <div className="text-sm text-gray-500">{key.added}</div>
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="text-sm text-gray-500">{key.lastUsed}</div>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                <td className="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
                   <div className="flex justify-end space-x-2">
                     <button 
                       onClick={() => toggleKeyVisibility(key.id)}
@@ -188,30 +181,21 @@ const ProjectKeys = () => {
       </div>
       
       {/* Key Management Info */}
-      <div className="bg-white rounded-lg shadow p-6">
-        <h2 className="text-lg font-semibold mb-4">SSH Key Management</h2>
+      <div className="p-6 bg-white rounded-lg shadow">
+        <h2 className="mb-4 text-lg font-semibold">SSH Key Management</h2>
         <div className="space-y-4">
           <div>
-            <h3 className="font-medium text-gray-900 mb-2">Generating SSH Keys</h3>
-            <div className="bg-gray-50 p-4 rounded-md">
-              <pre className="text-sm text-gray-700 overflow-x-auto">
+            <h3 className="mb-2 font-medium text-gray-900">Generating SSH Keys</h3>
+            <div className="p-4 rounded-md bg-gray-50">
+              <pre className="overflow-x-auto text-sm text-gray-700">
                 ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
               </pre>
             </div>
           </div>
           
           <div>
-            <h3 className="font-medium text-gray-900 mb-2">Connecting to Your Server</h3>
-            <div className="bg-gray-50 p-4 rounded-md">
-              <pre className="text-sm text-gray-700 overflow-x-auto">
-                ssh root@{projectId}.example.com
-              </pre>
-            </div>
-          </div>
-          
-          <div>
-            <h3 className="font-medium text-gray-900 mb-2">Security Best Practices</h3>
-            <ul className="list-disc pl-5 text-sm text-gray-700">
+            <h3 className="mb-2 font-medium text-gray-900">Security Best Practices</h3>
+            <ul className="pl-5 text-sm text-gray-700 list-disc">
               <li>Never share your private key</li>
               <li>Use a strong passphrase for your SSH key</li>
               <li>Regularly rotate your SSH keys</li>

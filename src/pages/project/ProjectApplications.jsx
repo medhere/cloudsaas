@@ -61,21 +61,24 @@ const ProjectApplications = () => {
 
   return (
     <div className="space-y-6">
-      <div className="flex justify-between items-center">
+      <div className="flex items-center justify-between">
         <h1 className="text-2xl font-bold">Applications</h1>
-        <button className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 flex items-center">
+        <Link
+          to={`/project/${projectId}/create-application`} 
+          className="flex items-center px-4 py-2 text-white bg-blue-600 rounded-md hover:bg-blue-700"
+        >
           <Plus size={16} className="mr-2" />
           New Application
-        </button>
+        </Link>
       </div>
       
       <div className="grid grid-cols-1 gap-6">
         {applications.map((app) => (
-          <div key={app.id} className="bg-white rounded-lg shadow overflow-hidden">
+          <div key={app.id} className="overflow-hidden bg-white rounded-lg shadow">
             <div className="p-6">
               <div className="flex items-center justify-between">
                 <div className="flex items-center">
-                  <div className="w-10 h-10 bg-blue-100 rounded-md flex items-center justify-center text-blue-600 mr-4">
+                  <div className="flex items-center justify-center w-10 h-10 mr-4 text-blue-600 bg-blue-100 rounded-md">
                     <Server size={20} />
                   </div>
                   <div>
@@ -93,45 +96,45 @@ const ProjectApplications = () => {
                 </div>
               </div>
               
-              <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 gap-4 mt-6 md:grid-cols-3">
                 <div className="flex flex-col">
-                  <span className="text-sm text-gray-500 flex items-center">
+                  <span className="flex items-center text-sm text-gray-500">
                     <Activity size={16} className="mr-1" /> CPU Usage
                   </span>
                   <span className="text-lg font-medium">{app.cpu}</span>
                 </div>
                 <div className="flex flex-col">
-                  <span className="text-sm text-gray-500 flex items-center">
+                  <span className="flex items-center text-sm text-gray-500">
                     <Server size={16} className="mr-1" /> Memory
                   </span>
                   <span className="text-lg font-medium">{app.memory}</span>
                 </div>
                 <div className="flex flex-col">
-                  <span className="text-sm text-gray-500 flex items-center">
+                  <span className="flex items-center text-sm text-gray-500">
                     <Clock size={16} className="mr-1" /> Uptime
                   </span>
                   <span className="text-lg font-medium">{app.uptime}</span>
                 </div>
               </div>
               
-              <div className="mt-6 flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-2 mt-6">
                 <Link 
                   to={`/project/${projectId}/app/${app.id}/overview`} 
-                  className="px-3 py-2 bg-blue-50 text-blue-700 rounded-md hover:bg-blue-100 flex items-center text-sm"
+                  className="flex items-center px-3 py-2 text-sm text-blue-700 rounded-md bg-blue-50 hover:bg-blue-100"
                 >
                   <Settings size={16} className="mr-1" />
                   Manage
                 </Link>
                 <Link 
                   to={`/project/${projectId}/app/${app.id}/routine`} 
-                  className="px-3 py-2 bg-gray-50 text-gray-700 rounded-md hover:bg-gray-100 flex items-center text-sm"
+                  className="flex items-center px-3 py-2 text-sm text-gray-700 rounded-md bg-gray-50 hover:bg-gray-100"
                 >
                   <Clock size={16} className="mr-1" />
                   Routine Tasks
                 </Link>
                 <Link 
                   to={`/project/${projectId}/app/${app.id}/monit`} 
-                  className="px-3 py-2 bg-gray-50 text-gray-700 rounded-md hover:bg-gray-100 flex items-center text-sm"
+                  className="flex items-center px-3 py-2 text-sm text-gray-700 rounded-md bg-gray-50 hover:bg-gray-100"
                 >
                   <BarChart2 size={16} className="mr-1" />
                   Monitoring
@@ -141,7 +144,7 @@ const ProjectApplications = () => {
                     href={app.url} 
                     target="_blank" 
                     rel="noopener noreferrer" 
-                    className="px-3 py-2 bg-gray-50 text-gray-700 rounded-md hover:bg-gray-100 flex items-center text-sm"
+                    className="flex items-center px-3 py-2 text-sm text-gray-700 rounded-md bg-gray-50 hover:bg-gray-100"
                   >
                     <ExternalLink size={16} className="mr-1" />
                     Open URL

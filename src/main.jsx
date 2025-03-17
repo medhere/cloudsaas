@@ -36,7 +36,9 @@ import Documentation from './pages/Documentation';
 // Project pages
 import ProjectOverview from './pages/project/ProjectOverview';
 import ProjectManage from './pages/project/ProjectManage';
+import ProjectChangeConfig from './pages/project/ProjectChangeConfig';
 import ProjectApplications from './pages/project/ProjectApplications';
+import ProjectCreateApplication from './pages/project/ProjectCreateApplication';
 import ProjectMarketplace from './pages/project/ProjectMarketplace';
 import ProjectKeys from './pages/project/ProjectKeys';
 import ProjectDeployment from './pages/project/ProjectDeployment';
@@ -68,6 +70,9 @@ import AppIntegration from './pages/app/AppIntegration';
 import AppBuilder from './pages/app/AppBuilder';
 import AppRoutine from './pages/app/AppRoutine';
 import AppMonit from './pages/app/AppMonit';
+
+
+
 
 const router = createBrowserRouter([
   {
@@ -112,7 +117,9 @@ const router = createBrowserRouter([
         children: [
           { index: true, element: <ProjectOverview /> },
           { path: 'manage', element: <ProjectManage /> },
+          { path: 'change-config', element: <ProjectChangeConfig /> },
           { path: 'applications', element: <ProjectApplications /> },
+          {path: 'create-application', element: <ProjectCreateApplication />},
           { path: 'marketplace', element: <ProjectMarketplace /> },
           { path: 'keys', element: <ProjectKeys /> },
           { path: 'deployment', element: <ProjectDeployment /> },

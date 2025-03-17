@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { Power, RefreshCw, Settings, Archive, Trash2, AlertTriangle } from 'lucide-react';
 
 const ProjectManage = () => {
   const { projectId } = useParams();
   const [isShutdownModalOpen, setIsShutdownModalOpen] = useState(false);
-  const [isResetModalOpen, setIsResetModalOpen] = useState(false);
+  const [isRefreshModalOpen, setIsRefreshModalOpen] = useState(false);
   
   // Mock data for backups
   const backups = [
@@ -17,7 +17,7 @@ const ProjectManage = () => {
   
   return (
     <div className="space-y-6">
-      <div className="flex justify-between items-center">
+      <div className="flex items-center justify-between">
         <h1 className="text-2xl font-bold">Manage Project: {projectId}</h1>
         <div className="flex items-center space-x-2">
           <span className={`px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800`}>
@@ -27,40 +27,40 @@ const ProjectManage = () => {
       </div>
       
       {/* Server Actions */}
-      <div className="bg-white rounded-lg shadow p-6">
-        <h2 className="text-lg font-semibold mb-4">Server Actions</h2>
+      <div className="p-6 bg-white rounded-lg shadow">
+        <h2 className="mb-4 text-lg font-semibold">Server Actions</h2>
         
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
           <button 
             onClick={() => setIsShutdownModalOpen(true)}
-            className="flex items-center justify-center p-4 border border-gray-200 rounded-lg hover:bg-red-50 hover:border-red-200 transition-colors"
+            className="flex items-center justify-center p-4 transition-colors border border-gray-200 rounded-lg hover:bg-red-50 hover:border-red-200"
           >
-            <Power className="text-red-600 mr-2" size={20} />
-            <span className="font-medium">Shutdown Server</span>
+            <Power className="mr-2 text-red-600" size={20} />
+            <span className="font-medium">Shutdown</span>
           </button>
           
           <button 
-            onClick={() => setIsResetModalOpen(true)}
-            className="flex items-center justify-center p-4 border border-gray-200 rounded-lg hover:bg-yellow-50 hover:border-yellow-200 transition-colors"
+            onClick={() => setIsRefreshModalOpen(true)}
+            className="flex items-center justify-center p-4 transition-colors border border-gray-200 rounded-lg hover:bg-yellow-50 hover:border-yellow-200"
           >
-            <RefreshCw className="text-yellow-600 mr-2" size={20} />
-            <span className="font-medium">Reboot Server</span>
+            <RefreshCw className="mr-2 text-yellow-600" size={20} />
+            <span className="font-medium">Refresh</span>
           </button>
           
-          <button 
-            className="flex items-center justify-center p-4 border border-gray-200 rounded-lg hover:bg-blue-50 hover:border-blue-200 transition-colors"
+          <Link to="../change-config"
+             className="flex items-center justify-center p-4 transition-colors border border-gray-200 rounded-lg hover:bg-blue-50 hover:border-blue-200"
           >
-            <Settings className="text-blue-600 mr-2" size={20} />
+            <Settings className="mr-2 text-blue-600" size={20} />
             <span className="font-medium">Change Configuration</span>
-          </button>
+          </Link>
         </div>
       </div>
       
       {/* Backup Management */}
-      <div className="bg-white rounded-lg shadow p-6">
-        <div className="flex justify-between items-center mb-4">
+      <div className="p-6 bg-white rounded-lg shadow">
+        <div className="flex items-center justify-between mb-4">
           <h2 className="text-lg font-semibold">Backup Management</h2>
-          <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md flex items-center gap-2">
+          <button className="flex items-center gap-2 px-4 py-2 text-white bg-blue-600 rounded-md hover:bg-blue-700">
             <Archive size={16} />
             <span>Create Backup</span>
           </button>
@@ -70,19 +70,19 @@ const ProjectManage = () => {
           <table className="min-w-full divide-y divide-gray-200">
             <thead className="bg-gray-50">
               <tr>
-                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th scope="col" className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                   Name
                 </th>
-                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th scope="col" className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                   Date
                 </th>
-                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th scope="col" className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                   Size
                 </th>
-                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th scope="col" className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
                   Type
                 </th>
-                <th scope="col" className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th scope="col" className="px-6 py-3 text-xs font-medium tracking-wider text-right text-gray-500 uppercase">
                   Actions
                 </th>
               </tr>
@@ -106,8 +106,8 @@ const ProjectManage = () => {
                       {backup.type}
                     </span>
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                    <button className="text-blue-600 hover:text-blue-900 mr-3">Restore</button>
+                  <td className="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
+                    <button className="mr-3 text-blue-600 hover:text-blue-900">Restore</button>
                     <button className="text-red-600 hover:text-red-900">Delete</button>
                   </td>
                 </tr>
@@ -118,43 +118,49 @@ const ProjectManage = () => {
       </div>
       
       {/* Danger Zone */}
-      <div className="bg-white rounded-lg shadow p-6 border-l-4 border-red-500">
-        <h2 className="text-lg font-semibold mb-4">Danger Zone</h2>
+      <div className="p-6 bg-white border-l-4 border-red-500 rounded-lg shadow">
+        <h2 className="mb-4 text-lg font-semibold">Danger Zone</h2>
         
-        <div className="flex items-center justify-between p-4 border border-red-200 rounded-lg bg-red-50">
+        <div className="flex items-center justify-between p-4 border border-red-200 rounded-lg">
           <div>
-            <h3 className="font-medium text-red-800">Delete Project</h3>
-            <p className="text-sm text-red-600 mt-1">
-              Once you delete a project, there is no going back. Please be certain.
+            <h3 className="font-medium text-red-800">Reset/Delete Project</h3>
+            <p className="mt-1 text-sm text-red-600">
+              Once you reset/delete a project, there is no going back. Please be certain.
             </p>
           </div>
-          <button className="bg-white text-red-600 border border-red-300 hover:bg-red-50 px-4 py-2 rounded-md flex items-center gap-2">
-            <Trash2 size={16} />
-            <span>Delete Project</span>
-          </button>
+          <div className='flex items-end gap-2'>
+            <button className="flex items-center px-4 py-2 text-yellow-700 bg-white border border-yellow-600 rounded-md hover:bg-yellow-100">
+              <Trash2 size={16} />
+              <span>Reset Project</span>
+            </button>
+            <button className="flex items-center px-4 py-2 text-red-800 bg-white border border-red-600 rounded-md hover:bg-red-100">
+              <Trash2 size={16} />
+              <span>Delete Project</span>
+            </button>
+          </div>
         </div>
       </div>
       
       {/* Shutdown Modal */}
       {isShutdownModalOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg shadow-lg p-6 max-w-md w-full">
-            <div className="flex items-center text-red-600 mb-4">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="w-full max-w-md p-6 bg-white rounded-lg shadow-lg">
+            <div className="flex items-center mb-4 text-red-600">
               <AlertTriangle size={24} className="mr-2" />
               <h3 className="text-lg font-semibold">Confirm Shutdown</h3>
             </div>
-            <p className="text-gray-600 mb-4">
-              Are you sure you want to shutdown this server? All running applications will be stopped.
+            <p className="mb-4 text-gray-600">
+              Are you sure you want to shutdown this project? All running applications will be stopped.
             </p>
             <div className="flex justify-end space-x-3">
               <button 
                 onClick={() => setIsShutdownModalOpen(false)}
-                className="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50"
+                className="px-4 py-2 text-gray-700 border border-gray-300 rounded-md hover:bg-gray-50"
               >
                 Cancel
               </button>
               <button 
-                className="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700"
+                className="px-4 py-2 text-white bg-red-600 rounded-md hover:bg-red-700"
               >
                 Shutdown
               </button>
@@ -163,26 +169,26 @@ const ProjectManage = () => {
         </div>
       )}
       
-      {/* Reset Modal */}
-      {isResetModalOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg shadow-lg p-6 max-w-md w-full">
-            <div className="flex items-center text-yellow-600 mb-4">
+      {/* Refresh Modal */}
+      {isRefreshModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="w-full max-w-md p-6 bg-white rounded-lg shadow-lg">
+            <div className="flex items-center mb-4 text-yellow-600">
               <AlertTriangle size={24} className="mr-2" />
-              <h3 className="text-lg font-semibold">Confirm Reboot</h3>
+              <h3 className="text-lg font-semibold">Confirm Refresh</h3>
             </div>
-            <p className="text-gray-600 mb-4">
-              Are you sure you want to reboot this server? This will cause a brief downtime for all applications.
+            <p className="mb-4 text-gray-600">
+              Are you sure you want to refresh this project? This will cause a brief downtime for all applications.
             </p>
             <div className="flex justify-end space-x-3">
               <button 
-                onClick={() => setIsResetModalOpen(false)}
-                className="px-4 py-2 border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50"
+                onClick={() => setIsRefreshModalOpen(false)}
+                className="px-4 py-2 text-gray-700 border border-gray-300 rounded-md hover:bg-gray-50"
               >
                 Cancel
               </button>
               <button 
-                className="px-4 py-2 bg-yellow-600 text-white rounded-md hover:bg-yellow-700"
+                className="px-4 py-2 text-white bg-yellow-600 rounded-md hover:bg-yellow-700"
               >
                 Reboot
               </button>
