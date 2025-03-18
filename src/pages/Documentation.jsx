@@ -17,8 +17,6 @@ const Documentation = () => {
       docs: [
         { id: 'introduction', title: 'Introduction' },
         { id: 'quick-start', title: 'Quick Start Guide' },
-        { id: 'installation', title: 'Installation' },
-        { id: 'account-setup', title: 'Account Setup' }
       ]
     },
     {
@@ -211,16 +209,10 @@ Congratulations! Your application is now live on PaaS10.
             </div>
             <div className="hidden sm:ml-6 sm:flex sm:items-center">
               <Link
-                to="/"
-                className="inline-flex items-center justify-center px-4 py-2 ml-8 text-base font-medium text-white bg-blue-600 border border-transparent rounded-md shadow-sm whitespace-nowrap hover:bg-blue-700"
-              >
-                Home
-              </Link>
-              <Link
-                to="/dashboard"
+                to="/dashboard/support"
                 className="inline-flex items-center justify-center px-4 py-2 ml-3 text-base font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm whitespace-nowrap hover:bg-gray-50"
               >
-                Dashboard
+                Support
               </Link>
             </div>
           </div>

@@ -50,8 +50,8 @@ const Dashboard = () => {
       <h1 className="text-2xl font-bold">Dashboard</h1>
       
       {/* Stats Overview */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <div className="bg-white p-6 rounded-lg shadow">
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
+        <div className="p-6 bg-white rounded-lg shadow">
           <div className="flex items-center justify-between">
             <div>
               <p className="text-sm text-gray-500">Active Projects</p>
@@ -63,7 +63,7 @@ const Dashboard = () => {
           </div>
         </div>
         
-        <div className="bg-white p-6 rounded-lg shadow">
+        <div className="p-6 bg-white rounded-lg shadow">
           <div className="flex items-center justify-between">
             <div>
               <p className="text-sm text-gray-500">Team Members</p>
@@ -75,7 +75,7 @@ const Dashboard = () => {
           </div>
         </div>
         
-        <div className="bg-white p-6 rounded-lg shadow">
+        <div className="p-6 bg-white rounded-lg shadow">
           <div className="flex items-center justify-between">
             <div>
               <p className="text-sm text-gray-500">Deployments Today</p>
@@ -87,7 +87,7 @@ const Dashboard = () => {
           </div>
         </div>
         
-        <div className="bg-white p-6 rounded-lg shadow">
+        <div className="p-6 bg-white rounded-lg shadow">
           <div className="flex items-center justify-between">
             <div>
               <p className="text-sm text-gray-500">Alerts</p>
@@ -100,14 +100,14 @@ const Dashboard = () => {
         </div>
       </div>
       
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
         {/* Resource Usage from Random Projects */}
-        <div className="bg-white p-6 rounded-lg shadow lg:col-span-2">
-          <h2 className="text-lg font-semibold mb-4">Project Resource Usage</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="p-6 bg-white rounded-lg shadow lg:col-span-2">
+          <h2 className="mb-4 text-lg font-semibold">Project Resource Usage</h2>
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
             {randomProjects.map((project) => (
-              <div key={project.id} className="border border-gray-200 rounded-lg p-4">
-                <h3 className="font-medium text-gray-900 mb-3 truncate">{project.name}</h3>
+              <div key={project.id} className="p-4 border border-gray-200 rounded-lg">
+                <h3 className="mb-3 font-medium text-gray-900 truncate">{project.name}</h3>
                 <div className="space-y-3">
                   <div>
                     <div className="flex justify-between mb-1">
@@ -152,14 +152,14 @@ const Dashboard = () => {
             ))}
           </div>
           <div className="mt-4 text-right">
-            <Link to="/projects" className="text-sm text-blue-600 hover:text-blue-800">
+            <Link to="./projects" className="text-sm text-blue-600 hover:text-blue-800">
               View all projects →
             </Link>
           </div>
         </div>
         
         {/* Quick Billing Information */}
-        <div className="bg-white p-6 rounded-lg shadow">
+        <div className="p-6 bg-white rounded-lg shadow">
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-lg font-semibold">Billing Overview</h2>
             <CreditCard className="text-blue-600" size={20} />
@@ -170,13 +170,13 @@ const Dashboard = () => {
               <p className="text-sm text-gray-500">Current Plan</p>
               <div className="flex items-center justify-between mt-1">
                 <p className="font-medium">Pro Plan</p>
-                <span className="px-2 py-1 bg-blue-100 text-blue-800 text-xs font-medium rounded-full">
+                <span className="px-2 py-1 text-xs font-medium text-blue-800 bg-blue-100 rounded-full">
                   Active
                 </span>
               </div>
             </div>
             
-            <div className="border-t border-gray-100 pt-4">
+            <div className="pt-4 border-t border-gray-100">
               <p className="text-sm text-gray-500">Next Payment</p>
               <div className="flex items-center justify-between mt-1">
                 <p className="font-medium">$49.00</p>
@@ -184,11 +184,11 @@ const Dashboard = () => {
               </div>
             </div>
             
-            <div className="border-t border-gray-100 pt-4">
+            <div className="pt-4 border-t border-gray-100">
               <p className="text-sm text-gray-500">Resource Usage</p>
               <div className="mt-2 space-y-2">
                 <div>
-                  <div className="flex items-center justify-between text-xs mb-1">
+                  <div className="flex items-center justify-between mb-1 text-xs">
                     <span>Projects</span>
                     <span>10 of 15</span>
                   </div>
@@ -198,7 +198,7 @@ const Dashboard = () => {
                 </div>
                 
                 <div>
-                  <div className="flex items-center justify-between text-xs mb-1">
+                  <div className="flex items-center justify-between mb-1 text-xs">
                     <span>Storage</span>
                     <span>250GB of 500GB</span>
                   </div>
@@ -210,8 +210,8 @@ const Dashboard = () => {
             </div>
           </div>
           
-          <div className="mt-4 pt-4 border-t border-gray-100">
-            <Link to="/billing" className="text-sm text-blue-600 hover:text-blue-800 flex justify-between items-center">
+          <div className="pt-4 mt-4 border-t border-gray-100">
+            <Link to="./billing" className="flex items-center justify-between text-sm text-blue-600 hover:text-blue-800">
               <span>View billing details</span>
               <span>→</span>
             </Link>
@@ -220,7 +220,7 @@ const Dashboard = () => {
       </div>
       
       {/* Announcements */}
-      <div className="bg-white p-6 rounded-lg shadow">
+      <div className="p-6 bg-white rounded-lg shadow">
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-lg font-semibold">Announcements</h2>
           <Bell className="text-blue-600" size={20} />
@@ -228,7 +228,7 @@ const Dashboard = () => {
         
         <div className="space-y-4">
           {announcements.map((announcement) => (
-            <div key={announcement.id} className="border-b border-gray-100 pb-4 last:border-0 last:pb-0">
+            <div key={announcement.id} className="pb-4 border-b border-gray-100 last:border-0 last:pb-0">
               <div className="flex items-start">
                 <div className={`w-2 h-2 mt-2 mr-2 rounded-full bg-${announcement.priority === 'high' ? 'red' : 'yellow'}-500`}></div>
                 <div className="flex-1">
@@ -236,7 +236,7 @@ const Dashboard = () => {
                     <h3 className="font-medium text-gray-900">{announcement.title}</h3>
                     <span className="text-xs text-gray-500">{announcement.date}</span>
                   </div>
-                  <p className="text-sm text-gray-600 mt-1 line-clamp-2">{announcement.preview}</p>
+                  <p className="mt-1 text-sm text-gray-600 line-clamp-2">{announcement.preview}</p>
                 </div>
               </div>
               <div className="mt-2 text-right">
@@ -252,20 +252,20 @@ const Dashboard = () => {
         </div>
         
         <div className="mt-4 text-right">
-          <Link to="/support/announcements" className="text-sm text-blue-600 hover:text-blue-800">
+          <Link to="./support/announcements" className="text-sm text-blue-600 hover:text-blue-800">
             View all announcements →
           </Link>
         </div>
       </div>
       
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
         {/* Recent Activity */}
-        <div className="bg-white p-6 rounded-lg shadow">
-          <h2 className="text-lg font-semibold mb-4">Recent Activity</h2>
+        <div className="p-6 bg-white rounded-lg shadow">
+          <h2 className="mb-4 text-lg font-semibold">Recent Activity</h2>
           <div className="space-y-4">
             {[1, 2, 3, 4].map((item) => (
               <div key={item} className="flex items-start pb-4 border-b border-gray-100">
-                <div className="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center mr-3">
+                <div className="flex items-center justify-center w-8 h-8 mr-3 bg-blue-100 rounded-full">
                   <Clock size={16} className="text-blue-600" />
                 </div>
                 <div>
@@ -275,41 +275,41 @@ const Dashboard = () => {
               </div>
             ))}
           </div>
-          <button className="mt-4 text-sm text-blue-600 hover:text-blue-800">
-            View all activity
-          </button>
+          <Link to="./activity" className="mt-4 text-sm text-blue-600 hover:text-blue-800">
+            View all activity →
+          </Link>
         </div>
         
         {/* Alerts */}
-        <div className="bg-white p-6 rounded-lg shadow">
-          <h2 className="text-lg font-semibold mb-4">Alerts</h2>
+        <div className="p-6 bg-white rounded-lg shadow">
+          <h2 className="mb-4 text-lg font-semibold">Alerts</h2>
           <div className="space-y-4">
-            <div className="p-4 border-l-4 border-red-500 bg-red-50 rounded">
+            <div className="p-4 border-l-4 border-red-500 rounded bg-red-50">
               <div className="flex">
-                <AlertTriangle className="text-red-500 mr-3" size={20} />
+                <AlertTriangle className="mr-3 text-red-500" size={20} />
                 <div>
                   <p className="text-sm font-medium text-red-800">High CPU usage on "API Server"</p>
-                  <p className="text-xs text-red-700 mt-1">CPU usage has been above 90% for 15 minutes</p>
+                  <p className="mt-1 text-xs text-red-700">CPU usage has been above 90% for 15 minutes</p>
                 </div>
               </div>
             </div>
             
-            <div className="p-4 border-l-4 border-yellow-500 bg-yellow-50 rounded">
+            <div className="p-4 border-l-4 border-yellow-500 rounded bg-yellow-50">
               <div className="flex">
-                <AlertTriangle className="text-yellow-500 mr-3" size={20} />
+                <AlertTriangle className="mr-3 text-yellow-500" size={20} />
                 <div>
                   <p className="text-sm font-medium text-yellow-800">Storage limit approaching</p>
-                  <p className="text-xs text-yellow-700 mt-1">Project "CMS" is at 85% of storage limit</p>
+                  <p className="mt-1 text-xs text-yellow-700">Project "CMS" is at 85% of storage limit</p>
                 </div>
               </div>
             </div>
             
-            <div className="p-4 border-l-4 border-blue-500 bg-blue-50 rounded">
+            <div className="p-4 border-l-4 border-blue-500 rounded bg-blue-50">
               <div className="flex">
-                <AlertTriangle className="text-blue-500 mr-3" size={20} />
+                <AlertTriangle className="mr-3 text-blue-500" size={20} />
                 <div>
                   <p className="text-sm font-medium text-blue-800">Billing cycle ending soon</p>
-                  <p className="text-xs text-blue-700 mt-1">Your current billing cycle ends in 3 days</p>
+                  <p className="mt-1 text-xs text-blue-700">Your current billing cycle ends in 3 days</p>
                 </div>
               </div>
             </div>

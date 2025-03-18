@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { MessageSquare, HelpCircle, Clock, Plus, CreditCard, Wallet, AlertTriangle, X, Bell, Calendar, ChevronRight, ThumbsUp, Send, Star } from 'lucide-react';
+import { MessageSquare, HelpCircle, Clock, Plus, CreditCard, Wallet, AlertTriangle, X, Bell, Calendar, ChevronRight, ThumbsUp, Send, Star, Book } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import TicketModal from '../components/support/TicketModal';
 
@@ -303,6 +303,28 @@ const Support = () => {
               </div>
             </div>
           </div>
+
+          {/* Documentation */}
+          <div className="overflow-hidden bg-white rounded-lg shadow">
+            <div className="p-6">
+              <h2 className="mb-4 text-lg font-semibold">Documentation</h2>
+              <div className="flex items-center justify-between p-4 border rounded-lg border-grey-200">
+                <div>
+                  <h3 className="font-medium text-gray-800">Up-to-date information</h3>
+                  <p className="mt-1 text-sm text-gray-600">
+                    Get all needed information on product, usage, and troubleshooting.
+                  </p>
+                </div>
+                <div className='flex items-end gap-2'>
+                  <Link to="../documentation" className="flex items-center px-4 py-2 bg-white border rounded-md text-grey-700 border-grey-600 hover:bg-grey-100">
+                    <Book size={16} />
+                    <span>Open Documentation</span>
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+
 
           {/* Support Overview */}
           <div className="overflow-hidden bg-white rounded-lg shadow">

@@ -15,6 +15,8 @@ import HomePage from './pages/HomePage';
 import AuthPage from './pages/AuthPage';
 import PricingPage from './pages/PricingPage';
 import FeaturesPage from './pages/FeaturesPage';
+import HomeDocumentation from './pages/HomeDocumentation';
+
 
 // Dashboard pages
 import Dashboard from './pages/Dashboard';
@@ -88,7 +90,7 @@ const router = createHashRouter([
           { path: 'features', element: <FeaturesPage /> },
         ],
       },
-      { path: 'documentation', element: <Documentation /> },
+      { path: 'documentation', element: <HomeDocumentation /> },
       {
         path: '/dashboard',
         element: <DashboardLayout />,
@@ -109,6 +111,7 @@ const router = createHashRouter([
           { path: 'announcements/:announcementId', element: <AnnouncementDetail /> },
         ],
       },
+      { path: '/dashboard/documentation', element: <Documentation /> },
       {
         path: '/project/:projectId',
         element: <ProjectLayout />,

@@ -120,7 +120,6 @@ const ProjectManage = () => {
       {/* Danger Zone */}
       <div className="p-6 bg-white border-l-4 border-red-500 rounded-lg shadow">
         <h2 className="mb-4 text-lg font-semibold">Danger Zone</h2>
-        
         <div className="flex items-center justify-between p-4 border border-red-200 rounded-lg">
           <div>
             <h3 className="font-medium text-red-800">Reset/Delete Project</h3>

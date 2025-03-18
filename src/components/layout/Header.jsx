@@ -17,7 +17,7 @@ const Header = () => {
       </div>
       
       <div className="flex items-center gap-4">
-        <Link to="/documentation" className="p-2 rounded-full hover:bg-gray-100">
+        <Link to="/dashboard/support" className="p-2 rounded-full hover:bg-gray-100">
           <HelpCircle size={20} className="text-gray-600" />
         </Link>
         <div className="relative">
