@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { ChevronRight, Book, FileText, Code, Server, Database, Shield, Settings, HelpCircle, ArrowLeft, Search } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import TopNavbar from '../components/layout/TopNavbar';
 
 const Documentation = () => {
   const [activeSection, setActiveSection] = useState('getting-started');
@@ -194,107 +193,73 @@ Congratulations! Your application is now live on PaaS10.
     : docSections;
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Top Navigation */}
-      <nav className="fixed z-10 w-full bg-white shadow-sm">
-        <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
-          <div className="flex justify-between h-16">
-            <div className="flex items-center">
-              <Link to="/" className="flex items-center flex-shrink-0">
-                <div className="flex items-center justify-center w-8 h-8 mr-2 text-lg font-bold text-white bg-blue-600 rounded-md">
-                  C
-                </div>
-                <span className="text-xl font-bold">PaaS10</span>
-              </Link>
-            </div>
-            <div className="hidden sm:ml-6 sm:flex sm:items-center">
-              <Link
-                to="/dashboard/support"
-                className="inline-flex items-center justify-center px-4 py-2 ml-3 text-base font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm whitespace-nowrap hover:bg-gray-50"
+
+    <div className=" flex min-h-[calc(100vh-64px)]">
+      {/* Documentation Sidebar */}
+      <div className="w-64 min-h-full bg-white border-r border-gray-200">
+        <div className="p-4 border-b border-gray-200">
+          <div className="relative">
+            <input
+              type="text"
+              placeholder="Search docs..."
+              className="w-full py-2 pl-10 pr-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+            <Search className="absolute text-gray-400 transform -translate-y-1/2 left-3 top-1/2" size={18} />
+          </div>
+        </div>
+
+        <nav className="p-4 overflow-y-auto max-h-[calc(100vh-180px)]">
+          {filteredSections.map((section) => (
+            <div key={section.id} className="mb-4">
+              <button
+                onClick={() => setActiveSection(section.id === activeSection ? null : section.id)}
+                className="flex items-center justify-between w-full px-2 py-2 text-sm font-medium text-left text-gray-700 rounded-md hover:bg-gray-100"
               >
-                Support
-              </Link>
+                <div className="flex items-center">
+                  <span className="mr-2 text-gray-500">{section.icon}</span>
+                  {section.title}
+                </div>
+                <ChevronRight
+                  size={16}
+                  className={`transform transition-transform ${activeSection === section.id ? 'rotate-90' : ''
+                    }`}
+                />
+              </button>
+
+              {activeSection === section.id && (
+                <div className="pl-8 mt-1 space-y-1">
+                  {section.docs.map((doc) => (
+                    <button
+                      key={doc.id}
+                      onClick={() => setActiveDoc(doc.id)}
+                      className={`block w-full text-left px-2 py-2 text-sm rounded-md ${activeDoc === doc.id
+                        ? 'bg-blue-50 text-blue-700 font-medium'
+                        : 'text-gray-600 hover:bg-gray-50'
+                        }`}
+                    >
+                      {doc.title}
+                    </button>
+                  ))}
+                </div>
+              )}
             </div>
-          </div>
-        </div>
-      </nav>
+          ))}
+        </nav>
+      </div>
 
-      <div className="pt-16 flex min-h-[calc(100vh-64px)]">
-        {/* Documentation Sidebar */}
-        <div className="w-64 min-h-full bg-white border-r border-gray-200">
-          <div className="p-4 border-b border-gray-200">
-            <div className="relative">
-              <input
-                type="text"
-                placeholder="Search docs..."
-                className="w-full py-2 pl-10 pr-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-              />
-              <Search className="absolute text-gray-400 transform -translate-y-1/2 left-3 top-1/2" size={18} />
-            </div>
-          </div>
-
-          <nav className="p-4 overflow-y-auto max-h-[calc(100vh-180px)]">
-            {filteredSections.map((section) => (
-              <div key={section.id} className="mb-4">
-                <button
-                  onClick={() => setActiveSection(section.id === activeSection ? null : section.id)}
-                  className="flex items-center justify-between w-full px-2 py-2 text-sm font-medium text-left text-gray-700 rounded-md hover:bg-gray-100"
-                >
-                  <div className="flex items-center">
-                    <span className="mr-2 text-gray-500">{section.icon}</span>
-                    {section.title}
-                  </div>
-                  <ChevronRight
-                    size={16}
-                    className={`transform transition-transform ${activeSection === section.id ? 'rotate-90' : ''
-                      }`}
-                  />
-                </button>
-
-                {activeSection === section.id && (
-                  <div className="pl-8 mt-1 space-y-1">
-                    {section.docs.map((doc) => (
-                      <button
-                        key={doc.id}
-                        onClick={() => setActiveDoc(doc.id)}
-                        className={`block w-full text-left px-2 py-2 text-sm rounded-md ${activeDoc === doc.id
-                          ? 'bg-blue-50 text-blue-700 font-medium'
-                          : 'text-gray-600 hover:bg-gray-50'
-                          }`}
-                      >
-                        {doc.title}
-                      </button>
-                    ))}
-                  </div>
-                )}
-              </div>
-            ))}
-          </nav>
-        </div>
-
-        {/* Documentation Content */}
-        <div className="flex-1 p-8 overflow-auto">
-          {/* Back Button */}
-          <div className="max-w-4xl mx-auto mb-4">
-            <Link
-              to={-1}
-              className="inline-flex items-center text-sm font-medium text-blue-800 hover:text-blue-700"
-            >
-              <ArrowLeft size={16} className="mr-1" />
-              Go Back
-            </Link>
-          </div>
-
-          <div className="max-w-4xl p-8 mx-auto bg-white rounded-lg shadow-sm">
-            <div className="prose max-w-none">
-              <pre className="whitespace-pre-wrap">{currentDocContent}</pre>
-            </div>
+      {/* Documentation Content */}
+      <div className="flex-1 p-8 overflow-auto">
+        {/* Back Button */}
+        <div className="p-8 mx-auto bg-white rounded-lg shadow-sm max-w-7xl">
+          <div className="prose max-w-none">
+            <pre className="whitespace-pre-wrap">{currentDocContent}</pre>
           </div>
         </div>
       </div>
     </div>
+
   );
 };
 

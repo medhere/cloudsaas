@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { ChevronRight, Book, FileText, Code, Server, Database, Shield, Settings, HelpCircle, ArrowLeft, Search } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import TopNavbar from '../components/layout/TopNavbar';
 
 const HomeDocumentation = () => {
   const [activeSection, setActiveSection] = useState('getting-started');
@@ -202,17 +201,7 @@ Congratulations! Your application is now live on PaaS10.
         {/* Documentation Content */}
         <div className="flex-1 p-8 overflow-auto">
           {/* Back Button */}
-          <div className="max-w-4xl mx-auto mb-4">
-            <Link
-              to={-1}
-              className="inline-flex items-center text-sm font-medium text-blue-800 hover:text-blue-700"
-            >
-              <ArrowLeft size={16} className="mr-1" />
-              Go Back
-            </Link>
-          </div>
-
-          <div className="max-w-4xl p-8 mx-auto bg-white rounded-lg shadow-sm">
+          <div className="p-8 mx-auto bg-white rounded-lg shadow-sm max-w-7xl">
             <div className="prose max-w-none">
               <pre className="whitespace-pre-wrap">{currentDocContent}</pre>
             </div>
