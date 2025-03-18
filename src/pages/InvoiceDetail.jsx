@@ -74,8 +74,8 @@ const InvoiceDetail = () => {
                 </div>
                 <div>
                   <p className="text-sm font-medium text-gray-500">From</p>
-                  <p className="font-medium">CloudSaaS Inc.</p>
-                  <p className="text-sm text-gray-500">billing@cloudsaas.io</p>
+                  <p className="font-medium">PaaS10 Inc.</p>
+                  <p className="text-sm text-gray-500">billing@PaaS10.io</p>
                 </div>
               </div>
               

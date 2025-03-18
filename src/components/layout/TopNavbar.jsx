@@ -22,7 +22,7 @@ const TopNavbar = () => {
               <div className="w-8 h-8 bg-blue-600 rounded-md flex items-center justify-center text-white font-bold text-lg mr-2">
                 C
               </div>
-              <span className="text-xl font-bold">CloudSaaS</span>
+              <span className="text-xl font-bold">PaaS10</span>
             </Link>
             <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
               {navItems.map((item) => (

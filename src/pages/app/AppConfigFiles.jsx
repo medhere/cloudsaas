@@ -14,7 +14,7 @@ const AppConfigFiles = () => {
   "keywords": [
     "productivity",
     "cloud",
-    "saas"
+    "paas"
   ],
   "website": "https://example.com/",
   "repository": "https://github.com/username/repo",

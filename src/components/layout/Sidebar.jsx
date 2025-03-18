@@ -33,7 +33,7 @@ const Sidebar = () => {
           <div className="w-8 h-8 bg-blue-600 rounded-md flex items-center justify-center text-white font-bold text-lg mr-2">
             C
           </div>
-          <span className="text-xl font-bold">CloudSaaS</span>
+          <span className="text-xl font-bold">PaaS10</span>
         </div>
       </div>
       

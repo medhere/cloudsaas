@@ -12,7 +12,7 @@ const AuthPage = () => {
           </div>
         </div>
         <h2 className="mt-6 text-center text-3xl font-extrabold text-white">
-          Sign in to CloudSaaS
+          Sign in to PaaS10
         </h2>
         <p className="mt-2 text-center text-sm text-blue-100">
           Access your dashboard, projects, and team
@@ -49,7 +49,7 @@ const AuthPage = () => {
                 </div>
                 <div className="relative flex justify-center text-sm">
                   <span className="px-2 bg-white text-gray-500">
-                    New to CloudSaaS?
+                    New to PaaS10?
                   </span>
                 </div>
               </div>

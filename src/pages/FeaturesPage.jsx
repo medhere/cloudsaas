@@ -74,7 +74,7 @@ const FeaturesPage = () => {
             Everything you need to build in the cloud
           </p>
           <p className="mt-6 text-lg leading-8 text-gray-600">
-            CloudSaaS provides a complete platform for building, deploying, and scaling your applications with powerful features designed for modern development teams.
+            PaaS10 provides a complete platform for building, deploying, and scaling your applications with powerful features designed for modern development teams.
           </p>
         </div>
         

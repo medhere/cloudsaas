@@ -103,13 +103,13 @@ const Documentation = () => {
   // Sample documentation content
   const documentationContent = {
     'introduction': `
-# Introduction to CloudSaaS
+# Introduction to PaaS10
 
-Welcome to CloudSaaS, the all-in-one cloud platform for modern applications. This documentation will help you get started with our platform and make the most of our services.
+Welcome to PaaS10, the all-in-one cloud platform for modern applications. This documentation will help you get started with our platform and make the most of our services.
 
-## What is CloudSaaS?
+## What is PaaS10?
 
-CloudSaaS is a comprehensive cloud platform that provides infrastructure, deployment, and management tools for applications of all sizes. Whether you're building a small personal project or enterprise-grade applications, CloudSaaS offers the tools and services you need.
+PaaS10 is a comprehensive cloud platform that provides infrastructure, deployment, and management tools for applications of all sizes. Whether you're building a small personal project or enterprise-grade applications, PaaS10 offers the tools and services you need.
 
 ## Key Features
 
@@ -121,7 +121,7 @@ CloudSaaS is a comprehensive cloud platform that provides infrastructure, deploy
 
 ## Getting Started
 
-To get started with CloudSaaS, you'll need to:
+To get started with PaaS10, you'll need to:
 
 1. Create an account
 2. Set up your first project
@@ -132,19 +132,19 @@ Follow our [Quick Start Guide](/documentation/quick-start) to deploy your first 
     'quick-start': `
 # Quick Start Guide
 
-This guide will help you deploy your first application on CloudSaaS in just a few minutes.
+This guide will help you deploy your first application on PaaS10 in just a few minutes.
 
 ## Prerequisites
 
 Before you begin, make sure you have:
 
-- A CloudSaaS account
+- A PaaS10 account
 - Your application code in a Git repository
 - Basic familiarity with the command line
 
 ## Step 1: Create a New Project
 
-1. Log in to your CloudSaaS dashboard
+1. Log in to your PaaS10 dashboard
 2. Click on "New Project" in the Projects section
 3. Enter a name for your project and select the appropriate region
 4. Click "Create Project"
@@ -154,7 +154,7 @@ Before you begin, make sure you have:
 1. In your project dashboard, go to the "Deployments" tab
 2. Click "Connect Repository"
 3. Select your Git provider (GitHub, GitLab, or Bitbucket)
-4. Authorize CloudSaaS to access your repositories
+4. Authorize PaaS10 to access your repositories
 5. Select the repository containing your application
 
 ## Step 3: Configure Your Deployment
@@ -170,7 +170,7 @@ Before you begin, make sure you have:
 2. Monitor the deployment logs in real-time
 3. Once deployment is complete, you'll receive a URL for your application
 
-Congratulations! Your application is now live on CloudSaaS.
+Congratulations! Your application is now live on PaaS10.
 
 ## Next Steps
 
@@ -206,7 +206,7 @@ Congratulations! Your application is now live on CloudSaaS.
                 <div className="flex items-center justify-center w-8 h-8 mr-2 text-lg font-bold text-white bg-blue-600 rounded-md">
                   C
                 </div>
-                <span className="text-xl font-bold">CloudSaaS</span>
+                <span className="text-xl font-bold">PaaS10</span>
               </Link>
             </div>
             <div className="hidden sm:ml-6 sm:flex sm:items-center">

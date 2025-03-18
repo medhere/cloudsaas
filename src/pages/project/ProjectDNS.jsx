@@ -60,8 +60,8 @@ const ProjectDNS = () => {
           <div>
             <p className="text-sm text-gray-500">Nameservers</p>
             <ul className="text-sm">
-              <li>ns1.cloudsaas.com</li>
-              <li>ns2.cloudsaas.com</li>
+              <li>ns1.PaaS10.com</li>
+              <li>ns2.PaaS10.com</li>
             </ul>
           </div>
           

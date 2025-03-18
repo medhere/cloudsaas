@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { createHashRouter, RouterProvider } from 'react-router-dom';
 import App from './App';
 import './index.css';
 
@@ -72,9 +72,7 @@ import AppRoutine from './pages/app/AppRoutine';
 import AppMonit from './pages/app/AppMonit';
 
 
-
-
-const router = createBrowserRouter([
+const router = createHashRouter([
   {
     path: '/',
     element: <App />,

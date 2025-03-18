@@ -13,7 +13,7 @@ const HomePage = () => {
               Cloud Infrastructure Made Simple
             </h1>
             <p className="mt-6 text-lg leading-8 text-blue-100">
-              Deploy, scale, and manage your applications with ease. CloudSaaS provides everything you need to build and run modern applications in the cloud.
+              Deploy, scale, and manage your applications with ease. PaaS10 provides everything you need to build and run modern applications in the cloud.
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-6">
               <Link
@@ -39,7 +39,7 @@ const HomePage = () => {
               Everything you need to deploy your app
             </p>
             <p className="mt-6 text-lg leading-8 text-gray-600">
-              CloudSaaS provides a complete platform for building, deploying, and scaling your applications in the cloud.
+              PaaS10 provides a complete platform for building, deploying, and scaling your applications in the cloud.
             </p>
           </div>
           <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-4xl">

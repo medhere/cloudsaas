@@ -79,7 +79,9 @@ function AxiousLoadingUI({ children }) {
   );
 
   return (
-    <>Loading...</>
+    <>
+      {axiosState && <p className="text-center">Loading...</p>}
+    </>
     // <IonLoading
     //   spinner='lines-sharp'
     //   // translucent={true}
