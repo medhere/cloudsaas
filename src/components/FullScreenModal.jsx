@@ -1,9 +1,9 @@
 import { X } from 'lucide-react';
 
-const FullScreenModal = ({ child, header, onClose }) => {
+const FullScreenModal = ({ width, child, header, onClose }) => {
   
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto bg-white">
+    <div className={`max-w-[${width || '80'}%] fixed inset-0 z-50 overflow-y-auto bg-white`}>
       <div className="px-4 py-6 mx-auto">
         <div className="flex items-center justify-between mb-2">
           <h2 className="text-2xl font-bold">{header}</h2>
