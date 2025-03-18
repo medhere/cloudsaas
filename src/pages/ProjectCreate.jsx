@@ -404,7 +404,7 @@ const ProjectCreate = () => {
       
       <div className="flex justify-end space-x-4">
         <Link 
-          to="/projects" 
+          to={-1} 
           className="px-4 py-2 text-sm font-medium text-gray-700 border border-gray-300 rounded-md hover:bg-gray-50"
         >
           Cancel
