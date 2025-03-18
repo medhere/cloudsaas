@@ -1,12 +1,10 @@
 import axios from "axios"
-// import { loadProgressBar } from 'axios-progress-bar'
 import useAxios from 'axios-hooks'
 
 // export const REQUEST_URI = `https://${window.location.hostname}:4000/api`
-// export const REQUEST_URI = '/api'
-export const REQUEST_URI = import.meta.env.MODE === 'development' ? 'https://localhost:8000' : 'https://inretia.com'
+export const REQUEST_URI = import.meta.env.MODE === 'development' ? import.meta.env.DEV_URL : import.meta.env.PROD_URL
+export const API_PATH =  import.meta.env.API_PATH
 
-// loadProgressBar()
 
 const XHRLog = (setting = false) => {
 
@@ -51,7 +49,7 @@ export const XHR = async (method, url, userdata = null, config = {}, log = false
   const auth = localStorage.getItem('auth') || null;
   return await axios({
     url, method, timeout: 10000,
-    baseURL: REQUEST_URI+'/api',
+    baseURL: REQUEST_URI+API_PATH,
     headers: { 'Authorization': auth ? `Bearer ${auth}` : undefined, },
     params: method === 'get' ? userdata : undefined,
     data: method !== 'get' ? userdata : undefined,
@@ -72,7 +70,7 @@ export const useXHR = (method, url, userdata = null, autoStart = false, config =
   const [{ data, loading, error, response }, execute, manualCancel] = useAxios(
     {
       url, method, timeout: 20000,
-      baseURL: REQUEST_URI+'/api',
+      baseURL: REQUEST_URI+API_PATH,
       headers: { 'Authorization': auth ? `Bearer ${auth}` : undefined, },
       params: method === 'get' ? userdata : undefined,
       data: method !== 'get' ? userdata : undefined,

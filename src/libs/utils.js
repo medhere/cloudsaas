@@ -20,8 +20,8 @@ export var sleep = (n = 2) => new Promise(r => setTimeout(r, n * 1000));
 // sleep(2).then();
 
 
-export const formatCurrency = (price) => {
-    return "₦" + parseFloat(price).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+export const formatCurrency = (code, symbol, price) => {
+    return `${code || symbol} ` + parseFloat(price).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
 }
 
 
