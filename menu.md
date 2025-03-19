@@ -1,7 +1,7 @@
 the main menu will contain the following:
 Dashboard – Overview of projects, billing, resource usage, recent activity, and alerts.
 Projects – Create, Manage and Delete all projects (servers).
-Billing – Subscription plans, invoices, and payment methods.
+Billing – nvoices, and payment methods.
 Settings – User settings, API keys, and notifications.
 Team Management – Invite/manage team members, roles, and permissions.
 Activity Logs – Track system actions (server creation, deployments, billing events).

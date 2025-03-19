@@ -4,7 +4,7 @@
 const appManagement = {
     appCreate: 'dokku apps:create <app>', 
     appDestroy: 'dokku --force apps:destroy <app>',
-    // clone: 'dokku apps:clone <old-app> <new-app>'
+    //clone: 'dokku apps:clone <old-app> <new-app>',
     appExists: 'dokku apps:exists <app>', //if app does not exist, it returns non-zero 'failed' which is ok for checking app before creation or use db check or parse string for 'App appname does not exist'
     appListAdmin: 'dokku --quiet apps:list',
     appLock: 'dokku apps:lock <app>',
@@ -131,18 +131,18 @@ const builderManagement = {
 const deployManagement ={
     gitDeployInit: 'dokku git:initialize <app>', //use after dokku apps:create
     gitDeployRemoteZip: 'dokku git:from-archive --archive-type zip <app> <archive-url.zip> [<git-username> <git-email>]', // Updates an app's git repository with a given archive file
-    // gitDeployRemoteZip: 'curl -sSL -L --limit-rate 1M -o "<renamezip.zip>" "<archive-url.zip>" | dokku git:from-archive --archive-type zip <app> --', // Updates an app's git repository with a given archive file, always delete zip file
-    // gitDeployLocalZip: '<location/archive.zip> | dokku git:from-archive --archive-type zip <app> --', // Updates an app's git repository with a given archive file
+    gitDeployRemoteZip: 'curl -sSL -L --limit-rate 1M -o "<renamezip.zip>" "<archive-url.zip>" | dokku git:from-archive --archive-type zip <app> --', // Updates an app's git repository with a given archive file, always delete zip file
+    gitDeployLocalZip: '<location/archive.zip> | dokku git:from-archive --archive-type zip <app> --', // Updates an app's git repository with a given archive file
     gitDeployDockerImage: 'dokku git:from-image [--build-dir DIRECTORY] <app> <docker-image> [<git-username> <git-email>]', //useful for predefined public docker images, refer to registry management for private images
     gitDeployPublicRepo: 'dokku git:sync --build node-js-app https://github.com/heroku/node-js-getting-started.git <?branch, tag, commit>',
     //TODO: check how to allow deployment from private repo
     // gitDeploy: 'dokku git:allow-host <host>',
-    // gitDeploy: 'dokku git:auth <host> [<username> <password|PAT>]',
-    // gitDeploy: 'dokku git:sync [--build|build-if-changes] <app> <repository> [<git-ref>]',
+    gitDeploy: 'dokku git:auth <host> [<username> <password|PAT>]',
+    gitDeploy: 'dokku git:sync [--build|build-if-changes] <app> <repository> [<git-ref>]',
     //dokku git:from-image node-js-app my-registry/node-js-getting-started:latest
-    gitDeployReport: 'dokku git:report [<app>] [<flag>]',
-    gitDeployPropSet: 'dokku git:set <app> <key> (<value>)',
-    gitDeployPropClear: 'dokku git:set <app> <key> (<value>)',
+    //gitDeployReport: 'dokku git:report [<app>] [<flag>]',
+    //gitDeployPropSet: 'dokku git:set <app> <key> (<value>)',
+    //gitDeployPropClear: 'dokku git:set <app> <key> (<value>)',
 }
 
 

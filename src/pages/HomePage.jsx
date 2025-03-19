@@ -6,19 +6,19 @@ const HomePage = () => {
   return (
     <div className="bg-white">
       {/* Hero Section */}
-      <div className="relative pt-24 pb-16 sm:pt-32 sm:pb-24 lg:pb-32 bg-blue-900">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="mx-auto max-w-2xl text-center">
+      <div className="relative pt-24 pb-16 bg-blue-900 sm:pt-32 sm:pb-24 lg:pb-32">
+        <div className="px-6 mx-auto max-w-7xl lg:px-8">
+          <div className="max-w-2xl mx-auto text-center">
             <h1 className="text-4xl font-bold tracking-tight text-white sm:text-6xl">
               Cloud Infrastructure Made Simple
             </h1>
             <p className="mt-6 text-lg leading-8 text-blue-100">
               Deploy, scale, and manage your applications with ease. PaaS10 provides everything you need to build and run modern applications in the cloud.
             </p>
-            <div className="mt-10 flex items-center justify-center gap-x-6">
+            <div className="flex items-center justify-center mt-10 gap-x-6">
               <Link
                 to="/auth"
-                className="rounded-md bg-yellow-500 px-5 py-3 text-base font-semibold text-blue-900 shadow-sm hover:bg-yellow-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow-500"
+                className="px-5 py-3 text-base font-semibold text-blue-900 bg-yellow-500 rounded-md shadow-sm hover:bg-yellow-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow-500"
               >
                 Get started
               </Link>
@@ -32,8 +32,8 @@ const HomePage = () => {
 
       {/* Features Section */}
       <div className="py-24 sm:py-32">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="mx-auto max-w-2xl lg:text-center">
+        <div className="px-6 mx-auto max-w-7xl lg:px-8">
+          <div className="max-w-2xl mx-auto lg:text-center">
             <h2 className="text-base font-semibold leading-7 text-blue-800">Deploy Faster</h2>
             <p className="mt-2 text-3xl font-bold tracking-tight text-blue-900 sm:text-4xl">
               Everything you need to deploy your app
@@ -42,12 +42,12 @@ const HomePage = () => {
               PaaS10 provides a complete platform for building, deploying, and scaling your applications in the cloud.
             </p>
           </div>
-          <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-4xl">
+          <div className="max-w-2xl mx-auto mt-16 sm:mt-20 lg:mt-24 lg:max-w-4xl">
             <dl className="grid max-w-xl grid-cols-1 gap-x-8 gap-y-10 lg:max-w-none lg:grid-cols-2 lg:gap-y-16">
               <div className="relative pl-16">
                 <dt className="text-base font-semibold leading-7 text-blue-900">
-                  <div className="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-lg bg-blue-800">
-                    <Server className="h-6 w-6 text-white" aria-hidden="true" />
+                  <div className="absolute top-0 left-0 flex items-center justify-center w-10 h-10 bg-blue-800 rounded-lg">
+                    <Server className="w-6 h-6 text-white" aria-hidden="true" />
                   </div>
                   Scalable Infrastructure
                 </dt>
@@ -57,8 +57,8 @@ const HomePage = () => {
               </div>
               <div className="relative pl-16">
                 <dt className="text-base font-semibold leading-7 text-blue-900">
-                  <div className="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-lg bg-blue-800">
-                    <Database className="h-6 w-6 text-white" aria-hidden="true" />
+                  <div className="absolute top-0 left-0 flex items-center justify-center w-10 h-10 bg-blue-800 rounded-lg">
+                    <Database className="w-6 h-6 text-white" aria-hidden="true" />
                   </div>
                   Managed Databases
                 </dt>
@@ -68,8 +68,8 @@ const HomePage = () => {
               </div>
               <div className="relative pl-16">
                 <dt className="text-base font-semibold leading-7 text-blue-900">
-                  <div className="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-lg bg-blue-800">
-                    <Shield className="h-6 w-6 text-white" aria-hidden="true" />
+                  <div className="absolute top-0 left-0 flex items-center justify-center w-10 h-10 bg-blue-800 rounded-lg">
+                    <Shield className="w-6 h-6 text-white" aria-hidden="true" />
                   </div>
                   Advanced Security
                 </dt>
@@ -79,8 +79,8 @@ const HomePage = () => {
               </div>
               <div className="relative pl-16">
                 <dt className="text-base font-semibold leading-7 text-blue-900">
-                  <div className="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-lg bg-blue-800">
-                    <Users className="h-6 w-6 text-white" aria-hidden="true" />
+                  <div className="absolute top-0 left-0 flex items-center justify-center w-10 h-10 bg-blue-800 rounded-lg">
+                    <Users className="w-6 h-6 text-white" aria-hidden="true" />
                   </div>
                   Team Collaboration
                 </dt>
@@ -90,8 +90,8 @@ const HomePage = () => {
               </div>
               <div className="relative pl-16">
                 <dt className="text-base font-semibold leading-7 text-blue-900">
-                  <div className="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-lg bg-blue-800">
-                    <BarChart2 className="h-6 w-6 text-white" aria-hidden="true" />
+                  <div className="absolute top-0 left-0 flex items-center justify-center w-10 h-10 bg-blue-800 rounded-lg">
+                    <BarChart2 className="w-6 h-6 text-white" aria-hidden="true" />
                   </div>
                   Monitoring & Analytics
                 </dt>
@@ -101,8 +101,8 @@ const HomePage = () => {
               </div>
               <div className="relative pl-16">
                 <dt className="text-base font-semibold leading-7 text-blue-900">
-                  <div className="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-lg bg-blue-800">
-                    <Code className="h-6 w-6 text-white" aria-hidden="true" />
+                  <div className="absolute top-0 left-0 flex items-center justify-center w-10 h-10 bg-blue-800 rounded-lg">
+                    <Code className="w-6 h-6 text-white" aria-hidden="true" />
                   </div>
                   CI/CD Integration
                 </dt>
@@ -118,17 +118,17 @@ const HomePage = () => {
       {/* CTA Section */}
       <div className="bg-blue-900">
         <div className="px-6 py-24 sm:px-6 sm:py-32 lg:px-8">
-          <div className="mx-auto max-w-2xl text-center">
+          <div className="max-w-2xl mx-auto text-center">
             <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
               Ready to get started?
             </h2>
-            <p className="mx-auto mt-6 max-w-xl text-lg leading-8 text-blue-100">
+            <p className="max-w-xl mx-auto mt-6 text-lg leading-8 text-blue-100">
               Sign up today and deploy your first application in minutes. No credit card required to get started.
             </p>
-            <div className="mt-10 flex items-center justify-center gap-x-6">
+            <div className="flex items-center justify-center mt-10 gap-x-6">
               <Link
                 to="/auth"
-                className="rounded-md bg-yellow-500 px-5 py-3 text-base font-semibold text-blue-900 shadow-sm hover:bg-yellow-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow-500"
+                className="px-5 py-3 text-base font-semibold text-blue-900 bg-yellow-500 rounded-md shadow-sm hover:bg-yellow-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow-500"
               >
                 Sign up for free
               </Link>

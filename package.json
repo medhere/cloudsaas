@@ -5,7 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "mobile-dev": "VITE_IS_MOBILE=true vite",
     "build": "vite build",
+    "mobile-build": "VITE_IS_MOBILE=true vite build",
     "preview": "vite preview"
   },
   "dependencies": {
